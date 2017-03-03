@@ -1,7 +1,7 @@
 # TP API DOM
 
 ## Objectifs
-Interagir avec la page html en JavaScrip via l'API DOM.
+Interagir avec la page HTML en JavaScript grâce à l'API DOM.
 Se familiariser avec la norme ES6 et les outils associés.
 
 ## Préparatifs
@@ -10,6 +10,7 @@ Se familiariser avec la norme ES6 et les outils associés.
 - créer un dossier pour le projet et y placer le contenu du dossier de démarrage fourni dans ce repo.
 - dans ce dossier, installer & configurer babel qui permettra de coder le TP en ES6
 NB : la page inclue jQuery (nécessaire pour les composants bootstrap de la page), mais vous ne pouvez pas utiliser cette librairie pour ce TP :)
+
 
 ## Instructions
 1. Au clic sur le lien "à propos" du menu, afficher la div de class "popin" présente dans la page HTML (mais initialement masquée).
