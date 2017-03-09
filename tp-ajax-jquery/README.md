@@ -11,12 +11,12 @@ Lancer des appels asynchrones en AJAX et mettre en pratique la librairie jQuery.
 1. lors de la soumission du formulaire, s'il n'y a pas d'erreur lancer un appel ajax vers le script `proxy.php`
 2. afficher les résultats avec leur titre et l'image de chaque logement retourné
 3. compléter la requête AJAX en passant en GET les valeurs saisies par l'utilisateur dans le formulaire. Le nom des paramètres GET à ajouter à la requête sont : 
-- guests
-- location
-- checkin=jj/mm/aaaa
-- checkout=jj/mm/aaaa
-- price_min
-- price_max
+    + guests
+    + location
+    + checkin=jj/mm/aaaa
+    + checkout=jj/mm/aaaa
+    + price_min
+    + price_max
 
 
 ## Pour aller plus loin
