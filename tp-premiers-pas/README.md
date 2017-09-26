@@ -8,6 +8,7 @@ Mettre en place son environnement de développement et manipuler les premiers ty
 - Installer un éditeur de code optimisé pour le développement web : [SublimeText](https://www.sublimetext.com/), [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io/), ...
 - créer un dossier pour ce TP dans un emplacement accessible en http (répertoire htdocs pour xampp) et y placer le contenu du dossier de démarrage fourni dans ce repo.
 - inspecter le code HTML de la page
+- indice : en JavaScript, le caractère qui représente un saut de ligne est `'\n'`.
 
 ## Instructions
 1. Créer un sous dossier `js` et y créer un nouveau fichier `main.js`
