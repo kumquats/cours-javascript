@@ -6,7 +6,7 @@ Se familiariser avec la norme ES6 et les outils associés.
 
 ## Préparatifs
 - installer un serveur apache/php (sur windows [Apachefriends xampp](https://www.apachefriends.org/fr/index.html) ou [wampserver](http://www.wampserver.com/))
-- installer node.js (version 7.x.x) : si une ancienne ersion est installée, la désinstaller avant d'installer la nouvelle version
+- installer node.js (version 8.x.x) : si une ancienne ersion est installée, la désinstaller avant d'installer la nouvelle version
 - créer un dossier pour le projet et y placer le contenu du dossier de démarrage fourni dans ce repo.
 - dans ce dossier, installer & configurer babel qui permettra de coder le TP en ES6
 NB : la page inclue jQuery (nécessaire pour les composants bootstrap de la page), mais vous ne pouvez pas utiliser cette librairie pour ce TP :)
