@@ -23,7 +23,7 @@ Ce code fonctionnera à condition que vous ayez un fichier `js/main.js` dans vot
 1. Au clic sur le lien "à propos" du menu, afficher la div de class "modal" présente dans la page HTML (mais initialement masquée).
 2. Au clic sur le bouton "fermer", la croix ou en dehors de la popin, la refermer.
 3. Au clic sur chacun des liens du menu principal (sauf "à propos"), afficher le titre du lien cliqué dans la balise h1 de la section de classe "main". Associer un contenu différent à chaque lien (attribut HTML `data-xxxx`) et l'afficher dans la balise `<article>` lorsqu'un lien est cliqué
-5. dans la page "accueil", reprendre le code html présent dans "formulaire.html.tpl" et mettre en place (en JavaScript) une vérification de la saisie de l'utilisateur avec les règles de gestion suivantes : 
+5. dans la page "accueil", copier le code html présent dans "formulaire.html.tpl" et mettre en place (en JavaScript) une vérification de la saisie de l'utilisateur avec les règles de gestion suivantes : 
 - le lieu est obligatoire
 - la date de début doit être supérieure ou égale à la date du jour
 - la date de fin doit être supérieure à la date de début
