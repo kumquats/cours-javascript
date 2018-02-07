@@ -15,7 +15,7 @@ Mettre en place son environnement de développement et manipuler les premiers ty
 2. Inclure ce fichier dans le fichier `index.html`
 3. Créer une variable `html`. Lui affecter comme valeur le code html de la balise ayant comme id **"slideshow"**. La récupération du code html d'une balise peut se faire à l'aide de l'instruction :
 ```js
-document.getElementById('slideshow').innerHTML 
+document.querySelector('#slideshow').innerHTML
 /* retourne le code html contenu dans la balise d'id "slideshow" (sous la forme d'une String) */
 ```
 4. Manipuler la chaine de caractères contenue dans la variable html pour lui appliquer les transformations suivantes :
@@ -24,7 +24,7 @@ document.getElementById('slideshow').innerHTML
 - remplacer les balises `<span></span>` par des balises `<img>` ayant comme attribut `src` le contenu des balises `<span>`
 5. Remplacer le contenu de la balise **"slideshow"** par la chaine de caractères ainsi transformée à l'aide de l'instruction :
 ```js
-document.getElementById('slideshow').innerHTML = html;
+document.querySelector('#slideshow').innerHTML = html;
 /* modifie le code html de la balise d'id "slideshow" (prend en paramètre une String) */
 ```
 6. Créer une fonction `slideNext()` qui décale les images d'un cran vers la gauche (la 1ère devient la 3ème, la 2ème devient la 1ère, et la 3ème devient la 2ème) (la tester à l'aide de la console).

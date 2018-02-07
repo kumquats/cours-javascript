@@ -45,6 +45,6 @@
 	</form>
 </header>
 <section class="col-xs-6">
-	<ul class="results">
+	<ul class="results list-group">
 	</ul>
 </section>
