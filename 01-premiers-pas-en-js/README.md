@@ -8,13 +8,16 @@
 
 ## Préparatifs
 1. créer un dossier pour ce TP et y placer le contenu du dossier de démarrage fourni dans ce repo.
-2. lancer un serveur http dans le dossier créé :
+2. lancer un serveur http dans le dossier créé (python se met alors en attente d'une connexion http):
 	```bash
 	cd /chemin/vers/votre/dossier/demarrage
 	python3 -m http.server 8000
 	```
 3. vérifier dans le navigateur que la page index.html fournie s'affiche correctement en ouvrant l'url http://localhost:8000
-4. Installer un éditeur de code optimisé pour le développement web : [VSCode](https://code.visualstudio.com/) (recommandé !), [SublimeText](https://www.sublimetext.com/), [Atom](https://atom.io/), ...
+4. Installer un éditeur de code optimisé pour le développement web. Je vous recommande notamment [VSCode](https://code.visualstudio.com/).
+
+   Pour l'installer sur Linux en mode portable (sans les droits d'admin) téléchargez la version .targz [ici](https://code.visualstudio.com/docs/?dv=linux64), décompressez la dans le dossier de votre choix, puis créer un sous-dossier nommé `"data"` dans le répertoire de vscode. Lancer enfin l'exécutable "code".
+   <br>Il ne reste plus qu'à ouvrir le dossier du projet en le glissant dans la fenêtre de vscode.
 
 ## Intégration du JS dans la page
 
@@ -26,11 +29,11 @@
 			GOT
 		</a>
 		```
-	- dans une balise `<script>`. Le code s'exécute alors au chargement de la page, au moment où il arrive à cette ligne (le navigateur parse le document html de haut en bas):
+	- dans une balise `<script>`. Le code s'exécute alors au chargement de la page, au moment où le navigateur arrive à cette ligne (le navigateur parse le document html de haut en bas):
 		```html
 		<script>alert('Bienvenue à Westeros');</script>
 		```
-	- dans une balise `<script>` avec un attribut `src`. Dans ce cas le code JS peut alors être externalisé dans un fichier distinct. Le code s'exécute alors lorsque le fichier est chargé :
+	- dans une balise `<script>` avec un attribut `src`. Dans ce cas le code JS peut alors être externalisé dans un fichier distinct. Le code s'exécute lorsque le fichier est chargé :
 		```html
 		<script src="westeros.js"></script>
 		```
@@ -39,9 +42,9 @@
    **Rappel :** Pour éviter que le chargement du fichier JS ne bloque le chargement de la page HTML (comportement par défaut), il existe 2 solutions :
    - placer la balise `<script>` en toute fin de fichier html, juste **avant** la balise fermante `</body>`
    - placer la balise `<script>` dans le `<head>` du fichier, mais y ajouter un attribut `defer` (cf. [doc](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-defer))
-   C'est cette dernière solution que je préconise, le support navigateur étant très bon (IE10, Android 3+, iOS 5+, etc.) cf. https://caniuse.com/#feat=script-defer
+   C'est cette dernière solution que je préconise car elle présente l'avantage de ne pas mélanger le contenu du document (le `<body>`) avec des informations annexes comme le chargement de scripts JS (qui relèvent plutôt du `<head>`), le support navigateur étant très bon (IE10, Android 3+, iOS 5+, etc.) cf. https://caniuse.com/#feat=script-defer
 
-2. **Tester la page pour vérifier que le js est correctement chargé** : Ouvrir les outils de développement de votre navigateur (touche <kbd>F12</kbd> sur Chrome) et ouvrir le panneau "Console".
+2. **Testez la page pour vérifier que le js est correctement chargé** : Ouvrir les outils de développement de votre navigateur (touche <kbd>F12</kbd> sur Chrome) et ouvrir le panneau "Console".
 <br>Si le fichier `main.js` est correctement chargé, le texte 'welcome to PizzaLand 🍕 !' doit s'afficher dans la console. En effet, le fichier main.js contient l'instruction
 	```js
 	console.log('Welcome to PizzaLand 🍕 !');
@@ -57,10 +60,10 @@
 
 Lorsqu'on développe en JS, les outils de debug dont on dispose nous sont fournis par le navigateur. Tous les navigateurs (même Internet Explorer...) disposent d'outils de développement. Sur Chrome, pour les afficher c'est donc, comme vu plus haut, la touche <kbd>F12</kbd>. On peut également les afficher en faisant un clic droit et en cliquant sur "Inspecter l'élément".
 
-Pendant les TP gardez toujours les outils de développement (et notamment la console) ouverts, ça vous sauvera la vie.
+**Pendant les TP gardez toujours les outils de développement (et notamment la console) ouverts, ça vous sauvera la vie.**
 
 ### devtools : La console
-La console sert à afficher les instructions console.log() mais aussi les erreurs éventuelles dans votre code (vous me direz que ce n'est pas la peine, que vous ne faites jamais d'erreur, mais on sait tous les deux que c'est un mensonge, *"n'est-ce pas ?"*).
+La console sert à afficher les instructions `console.log()` mais aussi les erreurs éventuelles dans votre code (vous me direz que ce n'est pas la peine, que vous ne faites jamais d'erreur, mais on sait tous les deux que c'est un mensonge, *"n'est-ce pas ?"*).
 
 <img src="images/devtools-console.jpg" width="80%">
 
@@ -78,7 +81,7 @@ Enfin, la console permet de tester rapidement du code JS grâce à un champ de s
 
 ### devtools : l'inspecteur d'éléments
 
-L'inspecteur d'élements permet de consulter ET de manipuler le code HTML et CSS de la page.
+L'inspecteur d'éléments permet de consulter ET de manipuler le code HTML et CSS de la page.
 
 <img src="images/devtools-inspecteur.jpg" width="80%">
 
@@ -168,9 +171,9 @@ let s3 = `Les étudiants de ${ getCurrentSchool() } sont les meilleurs`;
    - voir le texte 'images/regina.jpg' dans la page de votre navigateur.
    - pouvoir cliquer sur ce texte et être redirigé vers une image de pizza !
 
-6. **Modifier encore la variable html avant son affichage** pour remplacer le texte contenu dans la balise `<a>` par
-	- **une balise `<img>`** dont la source (_attribut `src`_) sera la chaîne `images/regina.html` valeur initiale de la variable `html`.
-	- une balise `<h4>` contenant le `nom` de la pizza
+6. **Modifier encore la variable html avant son affichage** en remplaçant le texte contenu dans la balise `<a>` par
+	- **une balise `<img>`** dont la source (_attribut `src`_) sera la chaîne `images/regina.jpg` valeur initiale de la variable `html`.
+	- **une balise `<h4>`** contenant le `nom` de la pizza
 
 	Contrôlez dans l'inspecteur d'éléments que le résultat obtenu est bien :
 	```html
@@ -181,7 +184,7 @@ let s3 = `Les étudiants de ${ getCurrentSchool() } sont les meilleurs`;
 	```
 
 ### Intégration de Babel
-Pour installer Babel et compiler votre code ES6+ en ES5, il vous faut Node.JS et configurer npm (Node Package Manager - l'outil qui permet de télécharger des utilitaires JS).
+Pour installer Babel et compiler votre code ES6+ en ES5, il vous faut Node.JS ce qui nous permettra d'utiliser npm (Node Package Manager - l'outil qui permet de télécharger des utilitaires JS).
 
 Tapez dans un terminal les instructions suivantes :
 1. **Configurez le proxy :**
@@ -190,17 +193,16 @@ Tapez dans un terminal les instructions suivantes :
 	```
 2. **Initialisez votre projet npm :**
 	```bash
-	npm config set proxy http://cache.univ-lille1.fr:3128
 	cd /chemin/vers/votre/dossier/demarrage
 	npm init
 	```
-	Répondez alors aux questions qui vous sont posées pour créer votre projet npm et notamment le fichier package.json qui nous sera utile par la suite.
+	Répondez alors aux questions qui vous sont posées pour créer votre projet npm. A la fin du questionnaire vous verrez qu'un fichier package.json a été créé. Celui-ci nous sera utile par la suite.
 3. **Installez babel :**
    ```bash
 	npm install --save-dev @babel/core @babel/cli
 	```
-	Vous noterez que @babel/core et @babel/cli ont été rajoutés dans les dépendances du fichier `package.json`
-4. **Installer le preset `env` qui permettra de transpiler les features ES6+** (il s'agit en fait du dictionnaire de traduction ES6+ -> ES5) :
+	Vous noterez que @babel/core et @babel/cli ont été rajoutés dans les dépendances du fichier `package.json` !
+4. **Installer le preset `env` qui permettra de transpiler les features ES6+ en ES5** (on peut voir le preset "env" comme un dictionnaire de traduction ES6+ -> ES5) :
 	```bash
 	npm install --save-dev @babel/preset-env
 	```
@@ -210,8 +212,7 @@ Tapez dans un terminal les instructions suivantes :
 		"presets": ["@babel/env"]
 	}
 	```
-
-6. Vous pouvez maintenant compiler votre code ES6+ en ES5 à l'aide de la commande :
+6. **Vous pouvez maintenant compiler votre code ES6+ en ES5** à l'aide de la commande :
 	```bash
 	.\node_modules\.bin\babel js -d build
 	```
@@ -219,16 +220,16 @@ Tapez dans un terminal les instructions suivantes :
 
 	Vérifiez que le fichier build/main.js est bien compilé et qu'il ne reste plus de traces de code ES6 (const, let, ...). Si ce n'est pas le cas, c'est que le .babelrc est mal configuré ou que vous avez raté une étape !
 
-7. **Une fois le fichier build/main.js créé, modifiez le fichier index.html pour charger ce fichier à la place du js/main.js. Recharger la page pour vérifier que tout fonctionne toujours correctement !**
+7. **Une fois le fichier `build/main.js` créé, modifiez le fichier index.html pour charger ce fichier à la place du `js/main.js`. Rechargez la page pour vérifier que tout fonctionne toujours correctement !**
 
-8. Pour simplifier le travail et éviter d'avoir à compiler manuellement à chaque modification, utilisez la commande suivante qui va tourner en tâche de fond et recompiler à chaque sauvegarde du fichier js/main.js :
+8. **Pour simplifier le travail et éviter d'avoir à compiler manuellement à chaque modification**, utilisez la commande suivante qui va tourner en tâche de fond et recompiler à chaque sauvegarde du fichier js/main.js :
 	```bash
 	.\node_modules\.bin\babel js -d build --verbose --watch --source-maps
 	```
 
 ### Manipulation des tableaux et objets
 
-Initialiser un tableau avec 3 chaines de caractères : 'Regina', 'Napolitaine', 'Spicy'. Parcourir ce tableau afin de générer 3 liens sur le modèle de celui généré plus haut.
+Initialiser un tableau nommé `data` avec 3 chaines de caractères : 'Regina', 'Napolitaine', 'Spicy'. Parcourir ce tableau afin de générer 3 liens sur le modèle de celui réalisé plus haut.
 
 Utilisez les différentes méthodes de parcours des tableaux :
 1. Une boucle `for` classique
@@ -236,7 +237,7 @@ Utilisez les différentes méthodes de parcours des tableaux :
 3. la méthode `Array.map` cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/map accompagnée de la méthode `Array.join` cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/join
 
 ## Objets
-Modifier le contenu du tableau en remplaçant les chaines de caractères par des objets littéraux de la forme suivante :
+Modifier le tableau `data` : au lieu de 3 chaînes de caractères, on va maintenant y mettre 3 objets littéraux de la forme suivante :
 ```js
 {
 	nom: 'Regina',
@@ -249,7 +250,7 @@ Modifier le contenu du tableau en remplaçant les chaines de caractères par des
 }
 ```
 
-Le code obtenu devra être de ce type :
+Modifier la boucle pour générer un code de ce type :
 ```html
 <article class="media">
 	<a href="images/regina.jpg">
