@@ -214,7 +214,7 @@ Tapez dans un terminal les instructions suivantes :
 	```
 6. **Vous pouvez maintenant compiler votre code ES6+ en ES5** à l'aide de la commande :
 	```bash
-	.\node_modules\.bin\babel js -d build
+	./node_modules/.bin/babel js -d build
 	```
 	Cette commande va créer un dossier `build` dans lequel sera placé le fichier main.js compilé !
 
@@ -224,7 +224,7 @@ Tapez dans un terminal les instructions suivantes :
 
 8. **Pour simplifier le travail et éviter d'avoir à compiler manuellement à chaque modification**, utilisez la commande suivante qui va tourner en tâche de fond et recompiler à chaque sauvegarde du fichier js/main.js :
 	```bash
-	.\node_modules\.bin\babel js -d build --verbose --watch --source-maps
+	./node_modules/.bin/babel js -d build --verbose --watch --source-maps
 	```
 
 ### Manipulation des tableaux et objets
@@ -244,8 +244,8 @@ Modifier le tableau `data` : au lieu de 3 chaînes de caractères, on va mainten
 	base: 'tomate',
 	ingredients: [
 		{id:1, nom: 'jambon'},
-		{id:1, nom: 'champignons'},
-		{id:1, nom: 'fromage'},
+		{id:2, nom: 'champignons'},
+		{id:3, nom: 'fromage'},
 	]
 }
 ```
