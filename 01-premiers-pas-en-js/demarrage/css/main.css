@@ -35,7 +35,7 @@ body {
 .video-detail {
 	padding: 20px;
 }
-.media {
+.media, .pizzasContainer > a {
 	padding: 20px;
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	margin: 0;
@@ -47,10 +47,12 @@ body {
 .media p {
 	font-size: 12px;
 }
-.media img {
+.media img, .pizzasContainer > a img {
 	margin-right: 20px;
+	width: 246px;
+	height: 138px;
 }
-.media h4 {
+.media h4 .pizzasContainer > a h4 {
 	font-size: 25px;
 	margin: 0;
 }

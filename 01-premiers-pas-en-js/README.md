@@ -7,21 +7,36 @@
 - et en profiter pour poser les bases de l'application ***"Pizzaland"*** 🍕 que nous développerons tout au long des différents TPs
 
 ## Préparatifs
-1. créer un dossier pour ce TP et y placer le contenu du dossier de démarrage fourni dans ce repo.
-2. lancer un serveur http dans le dossier créé (python se met alors en attente d'une connexion http):
+1. **Créer un dossier pour ce TP et y placer le contenu du dossier de démarrage fourni dans ce repo.**
+2. **Lancer un serveur http dans le dossier créé** :
 	```bash
 	cd /chemin/vers/votre/dossier/demarrage
 	python3 -m http.server 8000
 	```
-3. vérifier dans le navigateur que la page index.html fournie s'affiche correctement en ouvrant l'url http://localhost:8000
-4. Installer un éditeur de code optimisé pour le développement web. Je vous recommande notamment [VSCode](https://code.visualstudio.com/).
+	python se met alors en attente d'une connexion http et affiche une ligne du type :
+	```bash
+	Serving HTTP on 0.0.0.0 port 8000 ...
+	```
 
-   Pour l'installer sur Linux en mode portable (sans les droits d'admin) téléchargez la version .targz [ici](https://code.visualstudio.com/docs/?dv=linux64), décompressez la dans le dossier de votre choix, puis créer un sous-dossier nommé `"data"` dans le répertoire de vscode. Lancer enfin l'exécutable "code".
-   <br>Il ne reste plus qu'à ouvrir le dossier du projet en le glissant dans la fenêtre de vscode.
+	**NB:** *Si vous utilisez votre propre machine et que vous ne disposez pas de python3, vous pouvez installer un serveur http comme [XAMPP](https://www.apachefriends.org/fr/index.html), placer vos fichiers le dossier `htdocs` du répertoire d'installation puis tester votre page sur http://localhost.*
+3. **Vérifier dans le navigateur que la page index.html fournie s'affiche correctement** en ouvrant l'url http://localhost:8000. Le résultat attendu est le suivant : <br><a href="images/pizzaland-00.jpg"><img src="images/pizzaland-00.jpg" width="80%"></a>
 
-## Intégration du JS dans la page
+	*Si la page ne s'affiche pas correctement, vérifiez que vous avez bien lancé python dans le dossier de démarrage, c'est à dire celui où se trouve le fichier `index.html`.*
+4. **Installer un éditeur de code optimisé pour le développement web et particulièrement le JS moderne**. Je vous recommande notamment [Visual Studio Code](https://code.visualstudio.com/) (vscode). C'est un éditeur de code opensource et développé avec [Electron](https://electronjs.org/), c'est donc un outil qui est lui-même développé en JS !
 
-1. **Inclure le fichier `main.js` dans le fichier `index.html`** à l'aide d'une balise `<script>`.<br>
+	Pour l'installer sur Linux en mode portable (sans les droits d'admin) téléchargez la version .targz [ici](https://code.visualstudio.com/docs/?dv=linux64), décompressez la dans le dossier de votre choix, puis créez un sous-dossier nommé `"data"` dans le répertoire de vscode. Lancer enfin l'exécutable "code".
+	<br>Il ne reste plus qu'à ouvrir le dossier du projet en le glissant dans la fenêtre de vscode.
+
+	**Raccourcis clavier utiles :**
+	- <kbd>CTRL</kbd>+<kbd>P</kbd> : ouvrir un fichier à partir de son nom
+	- <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> : lancer n'importe quelle commande des menus.
+	- <kbd>CTRL</kbd>+<kbd>/</kbd> : commenter/décommenter
+	- cheat sheet linux : https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf
+
+## A. Intégration du JS dans la page
+
+1. **Inclure le fichier `main.js` dans le fichier `index.html`** à l'aide d'une balise `<script>`. (*Pour ouvrir le fichier dans vscode, utilisez le raccourci* <kbd>CTRL</kbd>+<kbd>P</kbd>)<br>
+
 	Comme vu pendant le cours il existe plusieurs manières d'intégrer du code JavaScript dans une page HTML :
 	- *en "inline"* c'est à dire directement dans les attributs d'une balise. Dans l'exemple ci-dessous le code JS s'exécutera lorsque l'utilisateur cliquera sur le lien :
 		```html
@@ -39,10 +54,10 @@
 		```
 	C'est cette dernière technique que nous emploierons car elle permet de bien séparer les responsabilités de notre appli (HTML et JS séparés).
 
-   **Rappel :** Pour éviter que le chargement du fichier JS ne bloque le chargement de la page HTML (comportement par défaut), il existe 2 solutions :
-   - placer la balise `<script>` en toute fin de fichier html, juste **avant** la balise fermante `</body>`
-   - placer la balise `<script>` dans le `<head>` du fichier, mais y ajouter un attribut `defer` (cf. [doc](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-defer))
-   C'est cette dernière solution que je préconise car elle présente l'avantage de ne pas mélanger le contenu du document (le `<body>`) avec des informations annexes comme le chargement de scripts JS (qui relèvent plutôt du `<head>`), le support navigateur étant très bon (IE10, Android 3+, iOS 5+, etc.) cf. https://caniuse.com/#feat=script-defer
+	**Attention :** Pour éviter que le chargement du fichier JS ne bloque le chargement de la page HTML (comportement par défaut), il existe 2 solutions :
+	- placer la balise `<script>` en toute fin de fichier html, juste **avant** la balise fermante `</body>`
+	- placer la balise `<script>` dans le `<head>` du fichier, mais y ajouter un attribut **`defer`** (cf. [doc](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-defer))
+	C'est cette dernière solution que je préconise car elle présente l'avantage de ne pas mélanger le contenu du document (le `<body>`) avec des informations annexes comme le chargement de scripts JS (qui relèvent plutôt du `<head>`) par ailleurs le support navigateur est très bon (IE10, Android 3+, iOS 5+, etc.) cf. https://caniuse.com/#feat=script-defer :
 
 2. **Testez la page pour vérifier que le js est correctement chargé** : Ouvrir les outils de développement de votre navigateur (touche <kbd>F12</kbd> sur Chrome) et ouvrir le panneau "Console".
 <br>Si le fichier `main.js` est correctement chargé, le texte 'welcome to PizzaLand 🍕 !' doit s'afficher dans la console. En effet, le fichier main.js contient l'instruction
@@ -56,13 +71,13 @@
 
 **_Pour la suite du TP, tout le code se fera dans ce fichier `main.js`, le fichier html ne devra pas être modifié !_**
 
-## Les devtools
+## B. Les devtools
 
-Lorsqu'on développe en JS, les outils de debug dont on dispose nous sont fournis par le navigateur. Tous les navigateurs (même Internet Explorer...) disposent d'outils de développement. Sur Chrome, pour les afficher c'est donc, comme vu plus haut, la touche <kbd>F12</kbd>. On peut également les afficher en faisant un clic droit et en cliquant sur "Inspecter l'élément".
+***Lorsque l'on développe en JS, les outils de debug dont on dispose nous sont fournis par le navigateur. Tous les navigateurs (même Internet Explorer...) disposent d'outils de développement. Sur Chrome, pour les afficher c'est donc, comme vu plus haut, la touche <kbd>F12</kbd>. On peut également les afficher en faisant un clic droit dans la page et en cliquant sur "Inspecter l'élément".***
 
-**Pendant les TP gardez toujours les outils de développement (et notamment la console) ouverts, ça vous sauvera la vie.**
+**Pendant les TP gardez <u>toujours</u> les outils de développement (et notamment la console) ouverts, ça vous sauvera la vie.**
 
-### devtools : La console
+### B.1. devtools : La console
 La console sert à afficher les instructions `console.log()` mais aussi les erreurs éventuelles dans votre code (vous me direz que ce n'est pas la peine, que vous ne faites jamais d'erreur, mais on sait tous les deux que c'est un mensonge, *"n'est-ce pas ?"*).
 
 <img src="images/devtools-console.jpg" width="80%">
@@ -79,7 +94,7 @@ L'objet `console` est un objet global qui contient la méthode `.log()` mais aus
 
 Enfin, la console permet de tester rapidement du code JS grâce à un champ de saisie. Tapez-y l'instruction `42+"12"-10` puis tapez <kbd>Entrée</kbd>. Incroyable !
 
-### devtools : l'inspecteur d'éléments
+### B.2. devtools : l'inspecteur d'éléments
 
 L'inspecteur d'éléments permet de consulter ET de manipuler le code HTML et CSS de la page.
 
@@ -87,7 +102,7 @@ L'inspecteur d'éléments permet de consulter ET de manipuler le code HTML et CS
 
 Il sera utile pour vérifier que le code HTML que va générer votre JS correspond bien à ce qui est attendu.
 
-### devtoools : l'onglet Sources
+### B.3. devtoools : l'onglet Sources
 L'onglet sources permet d'inspecter le code JavaScript de la page, de placer des breakpoints et de stopper l'exécution du code quand une erreur survient. Quand l'exécution du JS est stoppée, on peut consulter les valeurs des variables locales et globales, de voir la call-stack, etc.
 
 C'est probablement l'onglet des devtools le plus important lorsqu'on développe en JavaScript.
@@ -105,7 +120,7 @@ Une fois la page rechargée, l'exécution est interrompue, et il est possible de
 
 Pour reprendre l'exécution de la page, cliquez sur le bouton play bleu, puis re-cliquez sur le numéro de la 2e ligne pour enlever le breakpoint.
 
-## EcmaScript
+## C. Note à propos d'EcmaScript
 
 ### Pour tous les TP vous coderez en ES6+ !
 
@@ -123,7 +138,7 @@ Ceci étant dit, tout ce qui a été vu en cours jusqu'ici est compatible avec l
 
 
 
-### Manipulation des chaînes
+### D. Manipulation des chaînes
 ***Pour rappel il existe 3 manières de déclarer des chaines de caractères en JS :***
 ```js
 /* guillemets simples */
@@ -136,23 +151,23 @@ let s2 = "je suis une chaîne avec des double quotes";
 let s3 = `Les étudiants de ${ getCurrentSchool() } sont les meilleurs`;
 ```
 *Les templates strings sont à privilégier si vous devez injecter des valeurs dynamiques dans la chaîne ou si vous souhaitez la déclarer sur plusieurs ligne.*
-*<br>Si ce n'est pas le cas, le choix entre guillemets simples ou double est une question de préférences (les goûts et les couleurs...), la seule contrainte est qu'une fois qu'on a fait un choix, il faut s'y tenir (conventions de code). Entre guillemets doubles ou simples, ma préférence va aux guillemets simples qui évitent de devoir échapper les double quotes souvent utilisées lorsqu'on génère du code HTML.*
+*<br><br>Si ce n'est pas le cas, le choix entre guillemets simples ou double est une question de préférences (les goûts et les couleurs...), la seule contrainte est qu'une fois qu'on a fait un choix, il faut s'y tenir (conventions de code). Entre guillemets doubles ou simples, ma préférence va aux guillemets simples qui évitent de devoir échapper les double quotes souvent utilisées lorsqu'on génère du code HTML.*
 
 **Entrons dans le vif du sujet :**
 
-1. Effacer le code contenu dans le fichier `main.js` pour repartir d'un fichier vide.
-2. Créer une constante appelée `nom` et y assigner la chaine de caractères `Regina`
-3. **Créer une variable nommée `html`.** Sa valeur initiale sera la concaténation de :
+1. **Effacer le code contenu dans le fichier `main.js`** pour repartir d'un fichier vide.
+2. **Créer une constante appelée `nom`** et y assigner la chaine de caractères `Regina`
+3. **Créer une constante nommée `url`.** Sa valeur initiale sera la concaténation de :
    - la chaine de caractères `'images/'`,
    - la valeur de la variable `nom` transformée en minuscules à l'aide de la méthode `.toLowerCase()` cf. [doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
    - et de la chaîne de caractères `'.jpg'`
-4. **Sur la ligne suivante, modifier la valeur de la variable `html`** :
+4. **Sur la ligne suivante, créer une variable nommée `html`** :
 
-	Votre code devra permettre de transformer la variable `html` en une chaîne qui corresponde au code d'une balise `<a>` (*lien hypertexte*) :
-	- L'URL du lien (*attribut `href`*) devra correspondre à la valeur initiale de la variable `html`.
-	- Le contenu de la balise `<a>` correspondra lui aussi à la valeur initiale de la variable `html`
+	Votre code devra permettre d'assigner à la variable `html` une chaîne qui corresponde au code d'une balise `<a>` (*lien hypertexte*) :
+	- L'URL du lien (*attribut `href`*) devra correspondre à la valeur la constante `url`.
+	- Le contenu de la balise `<a>` correspondra lui aussi à la valeur de la constante `url`
 
-	NB: pour ça, les template strings sont parfaitement adaptées !
+	***NB:** pour ça, les template strings sont parfaitement adaptées !*
 
 	Afficher dans la console la valeur de la variable html, elle doit correspondre au code suivant :
    ```html
@@ -171,6 +186,8 @@ let s3 = `Les étudiants de ${ getCurrentSchool() } sont les meilleurs`;
    - voir le texte 'images/regina.jpg' dans la page de votre navigateur.
    - pouvoir cliquer sur ce texte et être redirigé vers une image de pizza !
 
+   <a href="images/pizzaland-01.jpg"><img src="images/pizzaland-01.jpg" width="80%"></a>
+
 6. **Modifier encore la variable html avant son affichage** en remplaçant le texte contenu dans la balise `<a>` par
 	- **une balise `<img>`** dont la source (_attribut `src`_) sera la chaîne `images/regina.jpg` valeur initiale de la variable `html`.
 	- **une balise `<h4>`** contenant le `nom` de la pizza
@@ -183,7 +200,10 @@ let s3 = `Les étudiants de ${ getCurrentSchool() } sont les meilleurs`;
 	</a>
 	```
 
-### Intégration de Babel
+	Le rendu doit être celui-ci :<br>
+	<a href="images/pizzaland-02.jpg"><img src="images/pizzaland-02.jpg" width="80%"></a>
+
+### E. Intégration de Babel
 Pour installer Babel et compiler votre code ES6+ en ES5, il vous faut Node.JS ce qui nous permettra d'utiliser npm (Node Package Manager - l'outil qui permet de télécharger des utilitaires JS).
 
 Tapez dans un terminal les instructions suivantes :
@@ -227,26 +247,26 @@ Tapez dans un terminal les instructions suivantes :
 	./node_modules/.bin/babel js -d build --verbose --watch --source-maps
 	```
 
-### Manipulation des tableaux et objets
+### F. Manipulation des tableaux
 
 Initialiser un tableau nommé `data` avec 3 chaines de caractères : 'Regina', 'Napolitaine', 'Spicy'. Parcourir ce tableau afin de générer 3 liens sur le modèle de celui réalisé plus haut.
 
 Utilisez les différentes méthodes de parcours des tableaux :
 1. Une boucle `for` classique
-2. La méthode `Array.foreach` cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/forEach
+2. La méthode `Array.forEach` cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/forEach
 3. la méthode `Array.map` cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/map accompagnée de la méthode `Array.join` cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/join
 
-## Objets
+Le résultat obtenu sera identique dans les 3 cas :
+<a href="images/pizzaland-03.jpg"><img src="images/pizzaland-03.jpg" width="80%"></a>
+
+## G. Les Objets littéraux
 Modifier le tableau `data` : au lieu de 3 chaînes de caractères, on va maintenant y mettre 3 objets littéraux de la forme suivante :
 ```js
 {
 	nom: 'Regina',
 	base: 'tomate',
-	ingredients: [
-		{id:1, nom: 'jambon'},
-		{id:2, nom: 'champignons'},
-		{id:3, nom: 'fromage'},
-	]
+	prix_petite: 5.5,
+	prix_grande: 7.5
 }
 ```
 
@@ -254,13 +274,18 @@ Modifier la boucle pour générer un code de ce type :
 ```html
 <article class="media">
 	<a href="images/regina.jpg">
-		<img src="images/regina.jpg" width="246" height="138" />
-		<h4>Regina</h4>
-		<ul>
-			<li>Jambon</li>
-			<li>Champignons</li>
-			<li>Fromage</li>
-		</ul>
+		<img src="images/regina.jpg" />
+		<section class="infos">
+			<h4>Regina</h4>
+			<ul>
+				<li>Prix petit format : 5.50 €</li>
+				<li>Prix grand format : 7.50 €</li>
+			</ul>
+		</section>
 	</a>
 </article>
 ```
+
+Le rendu final devra correspondre à ceci :
+
+<a href="images/pizzaland-04.jpg"><img src="images/pizzaland-04.jpg" width="90%"></a>
