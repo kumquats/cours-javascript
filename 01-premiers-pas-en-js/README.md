@@ -129,7 +129,7 @@ Pour reprendre l'exécution de la page, cliquez sur le bouton play bleu, puis re
 Consultez le support navigateur des différentes fonctionnalités EcmaScript ici :
 
 - pour ES6 : http://kangax.github.io/compat-table/es6/
-- pour ES6, ES7, ES8, ES9 (ES2016+) : http://kangax.github.io/compat-table/es2016plus/
+- pour ES7, ES8, ES9 (ES2016+) : http://kangax.github.io/compat-table/es2016plus/
 - pour les features en cours de spécification (comme les propriétés de classes, ou le mot clé `static`) : http://kangax.github.io/compat-table/esnext/
 
 Ceci étant dit, tout ce qui a été vu en cours jusqu'ici est compatible avec les dernières versions de Chrome/Chromium !
