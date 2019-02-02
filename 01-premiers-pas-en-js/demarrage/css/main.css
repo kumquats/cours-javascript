@@ -1,5 +1,11 @@
+html {
+	height: 100%;
+}
 body {
 	background: #f1f1f1;
+	padding-bottom: 50px;
+	position: relative;
+	min-height: 100%;
 }
 @media (min-width: 200px) {
 	.navbar-header{
@@ -40,6 +46,10 @@ body {
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	margin: 0;
 	display: flex;
+}
+.media .infos, .pizzasContainer > a .infos {
+	display: flex;
+	flex-direction: column;
 }
 .media a {
 	display: flex;
@@ -91,4 +101,23 @@ a h4, a:hover h4 {
 	color: #fff;
 	background-color: #b01717;
 }
-
+.navbar-brand {
+	padding: 0 15px;
+	display: flex;
+	align-items: center;
+}
+.navbar-brand > img {
+	display: inline-block;
+	height: 50px;
+	margin-right: 10px;
+}
+footer {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	font-size: 10px;
+	color: #0003;
+}
+footer a{
+	color: #0006;
+}
