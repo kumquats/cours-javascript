@@ -1,6 +1,6 @@
 // D. Manipulation des chaînes
 
-// D.2. Créer une constante appelée `nom` et y assigner la chaine de caractères `Regina`
+// D.2. Créer une constante appelée `nom` et y assigner la chaîne de caractères `Regina`
 const nom = 'Regina';
 // D.3. Créer une constante nommée `url`.
 const url = 'images/'+nom.toLowerCase()+'.jpg';
