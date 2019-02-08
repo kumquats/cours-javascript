@@ -1,0 +1,24 @@
+{
+  "name": "pizzaland",
+  "version": "1.0.0",
+  "description": "TP de JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumquats/cours-javascript.git"
+  },
+  "author": "Thomas Fritsch <tf@kumquats.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kumquats/cours-javascript/issues"
+  },
+  "homepage": "https://github.com/kumquats/cours-javascript#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1"
+  }
+}
