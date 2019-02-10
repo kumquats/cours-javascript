@@ -1,16 +1,31 @@
-# TP 2 - POO - modules - typage
+# TP 2 - POO - modules - typage <!-- omit in toc -->
 
-## Objectifs
+## Objectifs <!-- omit in toc -->
 - Savoir faire de la POO en ES6
 - Mettre en oeuvre le système de modules
 - Ajouter le support du typage statique à notre application
 - Et faire évoluer notre application ***"Pizzaland"*** 🍕
 
+## Sommaire <!-- omit in toc -->
+- [Préparatifs](#préparatifs)
+	- [*Préparatifs :* Installation](#préparatifs--installation)
+	- [*Préparatifs :* scripts de compilation](#préparatifs--scripts-de-compilation)
+- [A. POO](#a-poo)
+	- [A.1. Rappels de syntaxe](#a1-rappels-de-syntaxe)
+	- [A.2. Compiler avec Babel](#a2-compiler-avec-babel)
+	- [A.3. La classe Component](#a3-la-classe-component)
+	- [A.4. *Héritage :* La classe Img (héritage)](#a4-héritage--la-classe-img-héritage)
+	- [A.5. *Composition :* La classe PizzaThumbnail](#a5-composition--la-classe-pizzathumbnail)
+	- [A.6. *Propriétés et méthodes statiques :* La classe PageRenderer](#a6-propriétés-et-méthodes-statiques--la-classe-pagerenderer)
+- [B. Modules](#b-modules)
+- [C. Typage](#c-typage)
+- [D. La classe AddPizzaPage](#d-la-classe-addpizzapage)
+
 ## Préparatifs
 
 ***Si vous avez terminé le TP précédent, que vous êtes fier de vous, et <u>qu'un professeur vous a validé votre code et votre installation de Babel</u>, alors vous pouvez repartir de vos propres fichiers. <br>Si <u>une de ces conditions</u> n'est pas remplie, alors vous pouvez récupérer le dossier "demarrage" de ce TP qui contient une solution (commentée) du précédent TP.***
 
-
+### *Préparatifs :* Installation
 1. **Si vous utilisez le dossier de démarrage fourni dans ce repo (cad. que vous ne repartez pas de vos fichiers du TP précédent), une fois les fichiers récupérés, lancez la commande suivante dans le dossier "demarrage".** Cette commande permet d'installer les outils JS qui ont été utiles au développement du projet lors du précédent TP et notamment le compilateur [Babel](https://babeljs.io).
 
 	Ouvrez un terminal directement dans Visual Studio Code à l'aide du raccourci <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>*</kbd> (ce terminal intégré utilise le terminal par défaut du système, mais vous pouvez le configurer pour utiliser un autre terminal comme Git bash sous windows) puis tapez :
@@ -55,11 +70,11 @@
 	];
 	```
 
-## A. Le fichier `package.json`
+### *Préparatifs :* scripts de compilation
 
 Lors du précédent TP nous avons créé un fichier `package.json` à la racine du dossier `demarrage` grâce à la commande `npm init`.
 
-### A.1. Utilité du `package.json`
+#### Utilité du `package.json`
 Ce fichier sert à plusieurs choses et notamment :
 1. **Il permet de conserver l'historique de tous les paquets qui sont installés dans le projet. C'est en quelque sorte l'équivalent du fichier `pom.xml` de maven.** Vérifiez que dans la section `devDependencies` sont bien listés les paquets suivants :
 	- @babel/cli
@@ -72,7 +87,7 @@ Ce fichier sert à plusieurs choses et notamment :
 
 2. **Dans ce fichier on va également pouvoir ajouter des scripts personnalisés que l'on pourra lancer à l'aide de la commande `npm run`.** C'est cette dernière possibilité que l'on va maintenant utiliser pour nous simplifier la vie dans la suite du TP.
 
-### A.2 Créer un script personnalisé
+#### Créer un script personnalisé
 Jusque là pour lancer la compilation avec [Babel](https://babeljs.io), nous lancions une des deux commandes suivantes :
 
 ```bash
@@ -117,11 +132,11 @@ Avec le `package.json` on va créer des "raccourcis" pour lancer ces commandes p
 	```
 	Lancez la commande `npm run watch` et vérifiez que lorsque vous modifiez le fichier `js/main.js`, le fichier `build/main.js` est bien mis à jour.
 
-## B. POO
+## A. POO
 ***NB* : Dans ce TP vous coderez dans un premier temps vos classes directement dans le fichier `main.js` sans passer par des fichiers (modules) séparés.** Dans la suite du TP on organisera notre code plus proprement en séparant les classes dans des modules différents mais pour le moment on va simplifier la mise en place en remettant ça à plus tard.
 
-### B.1. Rappels de syntaxe
-#### B.1.1. class & propriétés publiques
+### A.1. Rappels de syntaxe
+#### A.1.1. class & propriétés publiques
 Comme vu dans le cours (*procurez vous le support pdf sur moodle !*) ES6 a introduit une nouvelle syntaxe pour la création de classes. Finis les `prototypes`, désormais le mot clé `class` fait son apparition et permet une d'utiliser syntaxe plus proche de ce qui se fait dans les autres langages objets :
 ```js
 class Animal {
@@ -150,7 +165,7 @@ Attention cependant, cette notation n'est pas encore dans la spec officielle d'E
 
 Pour pouvoir l'utiliser, il faudra modifier légèrement la configuration de Babel (cf. chapitre suivant).
 
-#### B.1.2. méthodes
+#### A.1.2. méthodes
 La création de méthodes d'une classe se fait de la manière suivante :
 ```js
 class Animal {
@@ -169,8 +184,8 @@ threeEyedRaven.fly();
 ```
 
 
-### B.2. Compiler avec Babel
-Comme vu dans le [chapitre précédent](#B.1.1.-class-&-propriétés-publiques), certaines syntaxes que nous allons utiliser dans le TP ne sont pas encore dans la spec officielle (c'est le cas pour la déclaration de propriétés d'instance en dehors du constructeur, les propriétés ou méthodes privées ou encore les propriétés et méthodes statiques).
+### A.2. Compiler avec Babel
+Comme vu dans le [chapitre précédent](#A.1.1.-class-&-propriétés-publiques), certaines syntaxes que nous allons utiliser dans le TP ne sont pas encore dans la spec officielle (c'est le cas pour la déclaration de propriétés d'instance en dehors du constructeur, les propriétés ou méthodes privées ou encore les propriétés et méthodes statiques).
 
 Ces fonctionnalités du langages sont dans un stade relativement avancé de discussion (niveau 3 sur 4) et ont désormais de grandes chances d'arriver dans la spécification officielle prochainement. Pas de raison de s'en priver donc.
 
@@ -191,18 +206,18 @@ Pour pouvoir utiliser ces syntaxes, nous allons modifier la configuration de Bab
 
 4. **Codez la classe `Animal` dans le fichier main.js** et vérifiez que la syntaxe employée pour la déclaration de la propriété `name` est correctement prise en compte par le compilateur et que la ligne `threeEyedRaven.fly()` affiche bien le message `Bran is flying !` dans la console.
 
-	Si c'est bon, vous êtes prêt pour la suite !
+	***Si c'est bon, vous êtes prêt pour la suite !***
 
-### B.3. La classe Component
-### B.4. *Héritage :* La classe Img (héritage)
-### B.5. *Composition :* La classe PizzaThumbnail
-### B.6. *Propriétés et méthodes statiques :* La classe PageRenderer
+### A.3. La classe Component
+### A.4. *Héritage :* La classe Img (héritage)
+### A.5. *Composition :* La classe PizzaThumbnail
+### A.6. *Propriétés et méthodes statiques :* La classe PageRenderer
 
-## C. Modules
+## B. Modules
 
-## D. Typage
+## C. Typage
 
-## E. La classe AddPizzaPage
+## D. La classe AddPizzaPage
 
 
 
