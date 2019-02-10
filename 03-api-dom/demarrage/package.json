@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel js -d build",
-    "watch": "babel js -d build --verbose --watch --source-maps"
+    "build": "webpack",
+    "watch": "webpack --mode=development --watch"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,10 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.3.1"
+    "@babel/plugin-proposal-private-methods": "^7.3.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   }
 }
