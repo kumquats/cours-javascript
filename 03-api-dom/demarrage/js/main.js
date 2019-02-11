@@ -18,7 +18,7 @@ if ( pageElement ) {
 
 
 
-
+/*
 
 
 class Input extends Component {
@@ -84,3 +84,4 @@ const addPizzaPage = new AddPizzaPage([
 	{id:4, nom:'Olives'},
 ]);
 PageRenderer.renderPage(addPizzaPage);
+*/
