@@ -372,9 +372,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var title = new _Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]('h1', null, ['La', ' ', 'carte']);
-document.querySelector('.pageTitle').innerHTML = title.render();
+var titleElement = document.querySelector('.pageTitle');
+
+if (titleElement) {
+  titleElement.innerHTML = title.render();
+}
+
 var homePage = new _HomePage_js__WEBPACK_IMPORTED_MODULE_1__["default"](_data_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
-document.querySelector('.pizzasContainer').innerHTML = homePage.render();
+var pageElement = document.querySelector('.pizzasContainer');
+
+if (pageElement) {
+  pageElement.innerHTML = homePage.render();
+}
 
 /***/ })
 

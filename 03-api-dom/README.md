@@ -20,8 +20,13 @@
 	- [B.1. Le support des modules dans les navigateurs modernes](#b1-le-support-des-modules-dans-les-navigateurs-modernes)
 	- [B.2. Rendre les modules compatibles avec les vieux navigateurs](#b2-rendre-les-modules-compatibles-avec-les-vieux-navigateurs)
 - [C. Typage](#c-typage)
-- [D. *Propriétés et méthodes statiques :* La classe PageRenderer](#d-propriétés-et-méthodes-statiques--la-classe-pagerenderer)
-- [E. La classe AddPizzaPage](#e-la-classe-addpizzapage)
+	- [C.1 Installation et configuration](#c1-installation-et-configuration)
+	- [C.2. Premiers tests](#c2-premiers-tests)
+	- [C.3. intégration avec Babel](#c3-intégration-avec-babel)
+	- [C.4. Typer notre code](#c4-typer-notre-code)
+- [D. Pour aller plus loin](#d-pour-aller-plus-loin)
+	- [D.1. *Propriétés et méthodes statiques :* La classe PageRenderer](#d1-propriétés-et-méthodes-statiques--la-classe-pagerenderer)
+	- [D.2. La classe AddPizzaPage](#d2-la-classe-addpizzapage)
 
 ## Préparatifs
 
@@ -433,45 +438,31 @@ Comme vu en cours, le bundler le plus employé en JS est [Webpack](https://webpa
 	}
 	```
 
-3. **Modifiez les scripts `"build"` et `"watch"` du fichier `package.json` pour replacer babel par webpack** :
+3. **Modifiez les scripts `"build"` et `"watch"` du fichier `package.json` pour replacer babel par webpack** (*notez quand même que babel sera toujours utilisé, mais c'est webpack qui va directement le piloter*):
 	```json
 	- "build": "babel js -d build",
-	+ "build": "webpack",
+	+ "build": "webpack --mode=production",
     - "watch": "babel js -d build --verbose --watch --source-maps"
     + "watch": "webpack --mode=development --watch"
 	```
 4. **Lancez la compilation** à l'aide de la commande `watch`
-5. **Enfin, vérifiez dans le navigateur que la page s'affiche toujours** et que dans l'onglet "Réseau"/"Network" vous n'avez maintenant bien plus qu'un seul fichier JS téléchargé par le navigateur : le `build/main.bundle.js`
+5. **Enfin, vérifiez dans le navigateur que la page s'affiche toujours** et que dans l'onglet "Réseau"/"Network" vous n'avez maintenant bien plus qu'un seul fichier JS téléchargé par le navigateur : le `build/main.bundle.js`<a href="images/pizzaland-07-modules-webpack.jpg"><img src="images/pizzaland-07-modules-webpack.jpg" width="80%"></a>
+
 
 ## C. Typage
-Si votre machine dispose de NodeJS, vous pouvez installer Flow en local et utiliser flow dans un terminal.
+Comme vu en cours, il existe plusieurs solutions pour ajouter du typage statique dans notre code JS.
 
+Celle que nous allons employer aujourd'hui se base sur [Flow](https://flow.org/).
+
+### C.1 Installation et configuration
 todo: configuration vscode
 
-Tapez dans un terminal les instructions suivantes :
-1. **Configurez le proxy :**
-	```bash
-	npm config set proxy http://cache.univ-lille1.fr:3128
-	npm config set https-proxy http://cache.univ-lille1.fr:3128
-	```
-2. **Initialisez votre projet npm :**
-	```bash
-	cd /chemin/vers/votre/dossier/demarrage
-	npm init
-	```
-
-	La commande `npm init`est à lancer dans le dossier où se trouve votre fichier index.html.
-
-	Répondez aux questions qui vous sont posées pour créer votre projet npm (si vous n'êtes pas sûr des réponses à donner à certaines questions, faites juste <kbd>Entrée</kbd>, vous aurez ainsi les valeurs par défaut).
-
-	A la fin du questionnaire vous verrez qu'un fichier package.json a été créé. Celui-ci est important car c'est dans ce fichier que sont enregistrées toutes les dépendances de votre projet (les librairies js que vous allez installer, comme flow par exemple). Dans la vraie vie, il s'agit d'un fichier que l'on versionne car il permet à n'importe qui d'installer automatiquement toutes les dépendances de votre projet sans avoir besoin de les lister une à une grâce à la commande `npm install`.
-
-3. **Installez Flow (attention, cette commande -comme les prochaines- est toujours à lancer dans votre dossier de travail, là où se trouvent les fichiers index.html et package.json) :**
+1. **Installez Flow (attention, cette commande est bien à lancer dans votre dossier de travail, là où se trouvent les fichiers index.html, package.json, .babelrc, etc.) :**
 	```bash
 	npm install --save-dev flow-bin
 	```
-	Vous noterez que flow-bin a été rajouté dans les dépendances du fichier `package.json` !
-4. **Initialisez flow à l'aide de la commande suivante :**
+
+2. **Initialisez flow à l'aide de la commande suivante :**
 	```bash
 	./node_modules/.bin/flow init
 	```
@@ -484,27 +475,135 @@ Tapez dans un terminal les instructions suivantes :
 	No errors!
 	```
 	En effet, pour le moment nos fichiers ne contiennent aucune information de typage !
-6. **Ajouter des informations de typage au fichier main.js : typer toutes les variables**
 
-7. **Une fois que le main.js est traité, passez aux autres fichiers du projet : typez les propriétés, les méthodes et leurs paramètres, les variables contenues dans chaque classe JS.**
+### C.2. Premiers tests
+1. **Dans le fichier `js/main.js` ajoutez le code suivant (au début du fichier):**
+   ```js
+   // @flow
+   const i:number = '12';
+   ```
+2. **Relancez la commande `./node_modules/.bin/flow`.** Cette fois plusieurs erreurs doivent apparaître dans votre terminal :
+	<br><a href="images/flow-error.jpg"><img src="images/flow-error.jpg" width="80%"></a>
 
-8. **Une fois que le message 'No errors!' apparaît enfin, vous remarquerez que votre code ne fonctionne plus dans le navigateur : les annotations flow, ne sont pas comprises par les navigateurs car rappelons qu'il ne s'agit pas d'une syntaxe EcmaScript officielle.** Pour régler le problème, on doit normalement installer [Babel](https://babeljs.io). Pour gagner du temps, on va simplement commenter les informations de typage de cette manière :
+	On a en réalité 3 erreurs :
+	- la première concerne notre ligne `const i:number = '12';` ce qui est normal puisqu'on a volontairement tenté d'assigner une chaîne de caractères dans une variable typée "number". On peut supprimer cette ligne.
+	- Les deux autres erreurs nous amènent à comprendre en quoi le typage des variables peut nous aider à avoir un code plus robuste... En effet l'erreur est la suivante :
+		```bash
+		Cannot assign title.render() to document.querySelector(...).innerHTML because property innerHTML is missing in null [1].
+		```
+		Ce que nous apprend cette ligne, c'est que la méthode `document.querySelector()` peut dans certains cas nous retourner une valeur vide (`null`). C'est en effet le cas par exemple si la page html ne contient pas de balise avec la classe CSS 'pageTitle', ou si le script s'exécute avant que la page ne soit complètement chargée.
 
-	Au lieu d'écrire :
+		Si on laisse notre code tel quel, alors on s'expose à des bugs car dans l'hypothèse où querySelector retournerait `null`, la ligne
+		```js
+		document.querySelector('.pageTitle').innerHTML = title.render();
+		```
+		planterait aussitôt (impossible d'appeler la propriété "innerHTML" sur une valeur nulle !).
+
+3. **Corrigez les deux erreurs remontées par Flow en décomposant les instructions `querySelector` et `innerHTML` en 2 étapes** :
 	```js
-	const maChaine:string = 'lol';
+	const titleElement:?HTMLElement = document.querySelector('.pageTitle');
+	if ( titleElement ) {
+		titleElement.innerHTML = title.render();
+	}
 	```
-	Il faudra écrire :
+
+	Vous noterez qu'on en a profité pour typer la nouvelle variable titleElement dans un type compatible avec la valeur de retour de querySelector (on approfondira ce sujet lors du prochain cours sur l'API DOM).
+
+	Faites de même pour la homePage et relancez flow, vous n'avez en principe plus d'erreur !
+
+### C.3. intégration avec Babel
+Si vous tentez de recompiler votre JS une fois les informations de typage ajoutées, vous verrez que webpack et babel n'arriveront plus à compiler votre code.
+
+En effet, la syntaxe flow ne fait pas partie de la spec officielle d'EcmaScript.
+
+On peut cependant assez facilement rendre tout ça compatible :
+1. **Installez le preset babel flow** (qui va permettre à babel de comprendre les instructions de typage de flow) :
+	```bash
+	npm install --save-dev @babel/preset-flow
+	```
+2. **Dans le fichier `.babelrc` ajoutez le preset "flow"** :
+	```json
+	{
+		"presets": [
+	-		["@babel/env", {"modules": false}]
+	+		["@babel/env", {"modules": false}],
+	+		"@babel/flow"
+		],
+		"plugins": ["@babel/plugin-proposal-class-properties"],
+	}
+	```
+3. **Relancez la compilation à l'aide de la commande `npm run build` ou `npm run watch`**, vérifiez que tout compile correctement et que l'affichage dans le navigateur est inchangé.
+
+
+
+## Ça y est ! <!-- omit in toc -->
+***vous avez un environnement de travail prêt à utiliser les dernières technologies JS : des classes avec une syntaxe moderne, des modules et du typage, tout en conservant une compatibilité avec les vieux navigateurs. La vie est belle !***
+
+***Ceci étant dit le travail n'est pas terminé...***
+
+### C.4. Typer notre code
+**Maintenant que flow est installé, ajoutez les informations de typage aux différents fichiers de notre application (main, Component, Img, PizzaThumbnail, HomePage):**
+ - typer toutes les variables (let, const)
+ - typer les propriétés d'instances
+ - typer les paramètres de méthodes et de fonctions
+ - typer les valeurs de retour des méthodes et fonctions
+
+ ***NB:** Ne pas oublier d'ajouter le commentaire `// @flow` en entête de chaque fichier modifié*
+
+## D. Pour aller plus loin
+Si vous avez terminé les précédents exercices voici qui devrait vous occuper et permettre de gagner du temps pour le prochain TP :
+### D.1. *Propriétés et méthodes statiques :* La classe PageRenderer
+1. Créez une classe `Page` (dans un module à part, bien entendu !)  :
+	- qui hérite de `Component`
+	- dont le constructeur reçoit comme paramètres: title (string) et children
+	- qui dispose d'une méthode `renderTitle()` qui retourne le titre passé au constructeur entouré d'une balise `<h1>...</h1>`
+2. Modifiez la classe `HomePage` pour lui faire hériter de `Page`. Son titre sera `'La carte'`.
+3. Créez une classe PageRenderer avec :
+	- une propriété statique `titleElement` dont la valeur est `document.querySelector('.pageTitle')`
+	- une propriété statique `contentElement` dont la valeur est `document.querySelector( '.pizzasContainer' )`
+   - une méthode statique `renderPage( page )` qui affiche dans `titleElement` le résultat de l'appel à la méthode `renderTitle()` et dans contentElement le résultat de l'appel à la méthode `render()` de la page passée en paramètre.
+4. Afficher la `HomePage` grâce à la classe `PageRenderer`
+
+***NB:** N'oubliez pas de typer toutes vos nouvelles classes au fur et à mesure (ne pas oublier non plus le commentaire `// @flow`) et de vérifier régulièrement que tout est conforme à l'aide de la commande `./node_modules/.bin/flow`*
+
+### D.2. La classe AddPizzaPage
+
+Sur le modèle de la HomePage créez une class `AddPizzaPage` qui servira de formulaire de création de Pizza.
+
+1. Avant toute chose, les éléments HTML de formulaire nécessitent d'avoir plus d'un attribut html. Par exemple la balise `<input type="number" >` peut également recevoir des attributs `min`, `max` et `step` pour configurer les valeurs possibles du champ. Avec notre classe Component actuelle c'est impossible car on ne peut avoir qu'un seul attribut par balise :
+   - remplacez la propriété `attribute` par `attributes` (avec un "s")
+   - remplacez la méthode `renderAttribute()` par `renderAttributes()` (avec un "s")
+   - modifiez tous les appels au constructeur de component qui envoient des attributs de la manière suivante : au lieu d'envoyer un objet avec des propriétés `name` et `value`, c'est maintenant le nom des clés qui détermineront les noms des attributs html à ajouter. Par exemple au lieu d'avoir :
+   ```js
+   new Component('a', {name:'href', value:'images/regina.jpg'} );
+   ```
+   on aura
+   ```js
+   new Component('a', {href:'images/regina.jpg'} );
+   ```
+   - modifiez le code de la méthode `renderAttributes()` pour prendre en compte cette nouvelle syntaxe
+
+2. Codez la classe AddPizzaPage qui hérite de `Page` et dont le titre est `"Ajouter une pizza"`.
+
+	Cette page doit contenir :
+	- une balise `<form>`
+	- un `<input type="text">` pour le nom de la pizza
+	- deux `<input type="number">` pour le prix_petite et prix_grande
+	- un `<select>` pour la base de la pizza avec deux valeurs possibles : 'tomate' ou 'crème'
+	- un `<select multiple>` cette fois pour les ingredients de la pizza.
+	- un bouton `<button>Ajouter</button>`
+
+	Le constructeur de la classe prend en paramètre un tableau d'ingrédients de cette manière :
 	```js
-	const maChaine/*:string*/ = 'lol';
+	const addPizzaPage = new AddPizzaPage([
+		{id:1, nom:'Mozarella'},
+		{id:2, nom:'Jambon'},
+		{id:3, nom:'Champignon'},
+		{id:4, nom:'Olives'},
+	]);
 	```
 
-	Notez que la vérification des types continue de fonctionner !
-
-## D. *Propriétés et méthodes statiques :* La classe PageRenderer
-
-
-## E. La classe AddPizzaPage
-
-
-
+	L'affichage se fait ensuite grâce au `PageRenderer` :
+	```js
+	PageRenderer.renderPage(addPizzaPage);
+	```
