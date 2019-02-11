@@ -1,14 +1,17 @@
+// @flow
+
 export default class Component {
-	tagName;
-	children;
-	attribute;
-	constructor( tagName = 'div', attribute=null, children = '' ){
+	tagName:string;
+	children:void|string|Array<string|Component>;
+	attribute:?{name:string,value:string};
+
+	constructor( tagName:string = 'div', attribute:?{name:string,value:string}= null, children:void|string|Array<string|Component> = '' ){
 		this.tagName = tagName;
 		this.attribute = attribute;
 		this.children = children;
 	}
-	render(){
-		let html = `<${this.tagName} ${this.renderAttribute()}`;
+	render():string{
+		let html:string = `<${this.tagName} ${this.renderAttribute()}`;
 		if ( this.children ){
 			html += `>
 				${this.renderChildren()}
@@ -19,21 +22,20 @@ export default class Component {
 		}
 		return html;
 	}
-	renderAttribute(){
+	renderAttribute():string {
 		if ( this.attribute ){
 			return `${this.attribute.name}="${this.attribute.value}"`
 		}
 		return '';
 	}
-	renderChildren(){
+	renderChildren():string {
 		if (this.children instanceof Array) {
-			let html = '';
+			let html:string = '';
 			this.children.forEach( child => {
 				html += child instanceof Component ? child.render() : child
 			});
 			return html;
-		} else {
-			return this.children;
 		}
+		return this.children || '';
 	}
 }

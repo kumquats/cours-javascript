@@ -1,16 +1,16 @@
 // @flow
-
 import Component from './Component.js';
 import HomePage from './HomePage.js';
 import data from './data.js';
+import PageRenderer from './PageRenderer.js';
 
-const title = new Component( 'h1', null, ['La', ' ', 'carte'] );
+const title:Component = new Component( 'h1', null, ['La', ' ', 'carte'] );
 const titleElement:?HTMLElement = document.querySelector('.pageTitle');
 if ( titleElement ) {
 	titleElement.innerHTML = title.render();
 }
 
-const homePage = new HomePage(data);
+const homePage:HomePage = new HomePage(data);
 const pageElement:?HTMLElement = document.querySelector('.pizzasContainer');
 if ( pageElement ) {
 	pageElement.innerHTML = homePage.render();

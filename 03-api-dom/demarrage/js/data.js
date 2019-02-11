@@ -1,4 +1,5 @@
-const data = [
+// @flow
+const data:Array<{nom:string, base:string, prix_petite:number, prix_grande:number}> = [
 	{
 		nom: 'Regina',
 		base: 'tomate',

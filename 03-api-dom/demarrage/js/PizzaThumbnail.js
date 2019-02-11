@@ -1,9 +1,10 @@
+// @flow
 import Component from './Component.js';
 import Img from './Img.js';
 
 export default class PizzaThumbnail extends Component {
-	constructor(pizza){
-		const imageUrl = `images/${pizza.nom.toLowerCase()}.jpg`;
+	constructor(pizza:{nom:string, prix_petite:number, prix_grande:number}){
+		const imageUrl:string = `images/${pizza.nom.toLowerCase()}.jpg`;
 		super('article', {name:'class', value:'media'}, [
 			new Component( 'a', {name:'href', value: imageUrl}, [
 				new Img(imageUrl),
@@ -16,6 +17,5 @@ export default class PizzaThumbnail extends Component {
 				])
 			])
 		]);
-		this.pizza = pizza;
 	}
 }
