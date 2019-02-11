@@ -156,9 +156,9 @@ function () {
           html += child instanceof Component ? child.render() : child;
         });
         return html;
-      } else {
-        return this.children;
       }
+
+      return this.children || '';
     }
   }]);
 
@@ -181,6 +181,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HomePage; });
 /* harmony import */ var _Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Component.js */ "./js/Component.js");
 /* harmony import */ var _PizzaThumbnail_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PizzaThumbnail.js */ "./js/PizzaThumbnail.js");
+/* harmony import */ var _Page_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Page.js */ "./js/Page.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -198,21 +199,22 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var HomePage =
 /*#__PURE__*/
-function (_Component) {
-  _inherits(HomePage, _Component);
+function (_Page) {
+  _inherits(HomePage, _Page);
 
   function HomePage(data) {
     _classCallCheck(this, HomePage);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(HomePage).call(this, 'section', null, data.map(function (pizza) {
+    return _possibleConstructorReturn(this, _getPrototypeOf(HomePage).call(this, 'La carte', data.map(function (pizza) {
       return new _PizzaThumbnail_js__WEBPACK_IMPORTED_MODULE_1__["default"](pizza);
     })));
   }
 
   return HomePage;
-}(_Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+}(_Page_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
 
@@ -266,6 +268,133 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./js/Page.js":
+/*!********************!*\
+  !*** ./js/Page.js ***!
+  \********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Page; });
+/* harmony import */ var _Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Component.js */ "./js/Component.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _classPrivateFieldGet(receiver, privateMap) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } var descriptor = privateMap.get(receiver); if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to set private field on non-instance"); } var descriptor = privateMap.get(receiver); if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
+
+
+
+var Page =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Page, _Component);
+
+  function Page(_title2, children) {
+    var _this;
+
+    _classCallCheck(this, Page);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Page).call(this, 'section', null, children));
+
+    _title.set(_assertThisInitialized(_assertThisInitialized(_this)), {
+      writable: true,
+      value: void 0
+    });
+
+    _classPrivateFieldSet(_assertThisInitialized(_assertThisInitialized(_this)), _title, _title2);
+
+    return _this;
+  }
+
+  _createClass(Page, [{
+    key: "renderTitle",
+    value: function renderTitle() {
+      return "<h1>".concat(_classPrivateFieldGet(this, _title), "</h1>");
+    }
+  }]);
+
+  return Page;
+}(_Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+var _title = new WeakMap();
+
+
+
+/***/ }),
+
+/***/ "./js/PageRenderer.js":
+/*!****************************!*\
+  !*** ./js/PageRenderer.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PageRenderer; });
+/* harmony import */ var _Page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Page */ "./js/Page.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var PageRenderer =
+/*#__PURE__*/
+function () {
+  function PageRenderer() {
+    _classCallCheck(this, PageRenderer);
+  }
+
+  _createClass(PageRenderer, null, [{
+    key: "renderPage",
+    value: function renderPage(page) {
+      if (this.titleElement) {
+        // $FlowFixMe
+        this.titleElement.innerHTML = page.renderTitle();
+      }
+
+      if (this.contentElement) {
+        // $FlowFixMe
+        this.contentElement.innerHTML = page.render();
+      }
+    }
+  }]);
+
+  return PageRenderer;
+}();
+
+_defineProperty(PageRenderer, "titleElement", void 0);
+
+_defineProperty(PageRenderer, "contentElement", void 0);
+
+
+
+/***/ }),
+
 /***/ "./js/PizzaThumbnail.js":
 /*!******************************!*\
   !*** ./js/PizzaThumbnail.js ***!
@@ -301,12 +430,10 @@ function (_Component) {
   _inherits(PizzaThumbnail, _Component);
 
   function PizzaThumbnail(pizza) {
-    var _this;
-
     _classCallCheck(this, PizzaThumbnail);
 
     var imageUrl = "images/".concat(pizza.nom.toLowerCase(), ".jpg");
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PizzaThumbnail).call(this, 'article', {
+    return _possibleConstructorReturn(this, _getPrototypeOf(PizzaThumbnail).call(this, 'article', {
       name: 'class',
       value: 'media'
     }, [new _Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]('a', {
@@ -316,8 +443,6 @@ function (_Component) {
       name: 'class',
       value: 'infos'
     }, [new _Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]('h4', null, pizza.nom), new _Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]('ul', null, [new _Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]('li', null, "Prix petit format : ".concat(pizza.prix_petite.toFixed(2), " \u20AC")), new _Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]('li', null, "Prix grand format : ".concat(pizza.prix_grande.toFixed(2), " \u20AC"))])])])]));
-    _this.pizza = pizza;
-    return _this;
   }
 
   return PizzaThumbnail;
@@ -365,25 +490,83 @@ var data = [{
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Component.js */ "./js/Component.js");
-/* harmony import */ var _HomePage_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomePage.js */ "./js/HomePage.js");
-/* harmony import */ var _data_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data.js */ "./js/data.js");
+/* harmony import */ var _HomePage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomePage.js */ "./js/HomePage.js");
+/* harmony import */ var _data_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data.js */ "./js/data.js");
+/* harmony import */ var _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PageRenderer.js */ "./js/PageRenderer.js");
 
 
 
-var title = new _Component_js__WEBPACK_IMPORTED_MODULE_0__["default"]('h1', null, ['La', ' ', 'carte']);
-var titleElement = document.querySelector('.pageTitle');
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].titleElement = document.querySelector('.pageTitle');
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].contentElement = document.querySelector('.pizzasContainer');
+var homePage = new _HomePage_js__WEBPACK_IMPORTED_MODULE_0__["default"](_data_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(homePage);
+/*
 
-if (titleElement) {
-  titleElement.innerHTML = title.render();
+
+class Input extends Component {
+	name;
+	constructor( type, name, label, attributes ){
+		super( 'input', {...attributes, type, name} );
+		this.name = name;
+		this.label = label;
+	}
+	render(){
+		return `<label>
+			${(this.label)}
+			${super.render()}
+		</label>`;
+	}
+}
+class Select extends Component {
+	#options = [];
+	constructor(name, options = [], attributes) {
+		super('select', {...attributes, name} );
+		this.options = options;
+	}
+	set options( value ){
+		this.#options = value;
+		this.children = this.#options.map(
+			option => new Component('option', {value: option.value || option}, [option.label || option] )
+		)
+	}
 }
 
-var homePage = new _HomePage_js__WEBPACK_IMPORTED_MODULE_1__["default"](_data_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
-var pageElement = document.querySelector('.pizzasContainer');
+class AddPizzaPage extends Page {
+	#ingredients = [];
 
-if (pageElement) {
-  pageElement.innerHTML = homePage.render();
+	constructor( ingredients ){
+		super( 'Ajouter une pizza', 'addPizzaPage', ['form']);
+		this.ingredients = ingredients;
+	}
+
+	set ingredients( value ){
+		this.#ingredients = value;
+		this.computeChildren();
+	}
+
+	computeChildren(){
+		this.children = [
+			new Component('form', null, [
+				new Input('text', 'nom', 'Nom de la pizza'),
+				new Select('base', ['tomate', 'crème'] ),
+				new Input('number', 'prix_petite', 'Prix petite taille :', {step:0.05,min:0,max:20} ),
+				new Input('number', 'prix_grande', 'Prix grande taille :', {step:0.05,min:0,max:20} ),
+				new Select('ingredients', this.#ingredients.map( ingredient => ({value:ingredient.id, label:ingredient.nom})), {multiple:true}),
+				new Component('button', null, ['Ajouter'])
+			])
+		];
+	}
+
 }
+
+const addPizzaPage = new AddPizzaPage([
+	{id:1, nom:'Mozzarella'},
+	{id:2, nom:'Jambon'},
+	{id:3, nom:'Champignon'},
+	{id:4, nom:'Olives'},
+]);
+PageRenderer.renderPage(addPizzaPage);
+*/
 
 /***/ })
 
