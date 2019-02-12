@@ -101,9 +101,8 @@ Avec le `package.json` on va créer des "raccourcis" pour lancer ces commandes p
 4. **Ajoutez dans le `package.json` un nouveau script nommé "build"** qui permettra de lancer la compilation Babel :
 	```json
 	"scripts": {
--		"test": "echo \"Error: no test specified\" && exit 1"
-+		"test": "echo \"Error: no test specified\" && exit 1",
-+		"build": "babel js -d build"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "babel js -d build"
 	},
 	```
 	*Vous noterez que le chemin  `./node_modules/.bin/' n'est plus nécessaire !*
