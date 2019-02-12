@@ -5,7 +5,8 @@
 	- [D.1 Installation et configuration](#d1-installation-et-configuration)
 	- [D.2. Premiers tests](#d2-premiers-tests)
 	- [D.3. intégration avec Babel](#d3-intégration-avec-babel)
-	- [D.4. Typer notre code](#d4-typer-notre-code)
+	- [D.4. Intégration dans Visual Studio Code](#d4-intégration-dans-visual-studio-code)
+	- [D.5. Typer notre code](#d5-typer-notre-code)
 - [Étape suivante](#Étape-suivante)
 
 ## D. Typage
@@ -14,7 +15,6 @@ Comme vu en cours, il existe plusieurs solutions pour ajouter du typage statique
 Celle que nous allons employer aujourd'hui se base sur [Flow](https://flow.org/).
 
 ### D.1 Installation et configuration
-todo: configuration vscode
 
 1. **Installez Flow (attention, cette commande est bien à lancer dans votre dossier de travail, là où se trouvent les fichiers index.html, package.json, .babelrc, etc.) :**
 	```bash
@@ -93,12 +93,23 @@ On peut cependant assez facilement rendre tout ça compatible :
 	```
 3. **Relancez la compilation à l'aide de la commande `npm run build` ou `npm run watch`**, vérifiez que tout compile correctement et que l'affichage dans le navigateur est inchangé.
 
+### D.4. Intégration dans Visual Studio Code
+Pour permettre à Visual Studio Code de comprendre les informations de typage flow, installez l'extension : https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
+
+1. Activez l'extension une fois installée en relançant vscode
+2. Ouvrez les préférences de vscode (<kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> &gt; Préférences : Ouvrir les paramètres <u>d'espace de travail</u>)
+3. recherchez la clé "Javascript › Validate: Enable" et décochez la case pour désactiver le système de vérification du JS intégré à VSCode
+4. recherchez la clé "Flow : Use NPMPackaged Flow" et cochez la case pour permettre à l'extension d'utiliser la version de flow qui est installée dans le projet.
+5. Vérifiez que le dossier que vous avez ouvert dans VSCode correspond bien au dossier "demarrage" : à la racine du dossier, dans l'explorateur de VSCode, vous devez trouver le dossier `node_modules`
+
+Désormais si vos fichiers comportent l'annotation `// @flow` alors le plugin va afficher les éventuelles erreurs de typage !
+
 ## Ça y est ! <!-- omit in toc -->
 ***vous avez un environnement de travail prêt à utiliser les dernières technologies JS : des classes avec une syntaxe moderne, des modules et du typage, tout en conservant une compatibilité avec les vieux navigateurs. La vie est belle !***
 
 ***Ceci étant dit le travail n'est pas terminé :***
 
-### D.4. Typer notre code
+### D.5. Typer notre code
 **Maintenant que flow est installé, ajoutez les informations de typage aux différents fichiers de notre application (main, Component, Img, PizzaThumbnail, HomePage):**
  - typer toutes les variables (let, const)
  - typer les propriétés d'instances
