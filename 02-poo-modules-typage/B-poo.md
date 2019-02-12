@@ -74,9 +74,8 @@ Pour pouvoir utiliser ces syntaxes, nous allons modifier la configuration de Bab
 2. Modifiez le fichier `.babelrc` pour y ajouter le plugin que l'on vient d'installer :
 	```json
 	{
-	-	"presets": ["@babel/env"]
-	+	"presets": ["@babel/env"],
-	+	"plugins": ["@babel/plugin-proposal-class-properties"]
+		"presets": ["@babel/env"],
+		"plugins": ["@babel/plugin-proposal-class-properties"]
 	}
 	```
 3. **Relancez la compilation à l'aide de la commande `npm run watch` et vérifiez qu'aucune erreur n'est remontée dans le terminal.**
