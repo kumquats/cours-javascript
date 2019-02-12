@@ -11,7 +11,7 @@
 ***Si vous avez terminé le TP précédent, que vous êtes fier de vous, et <u>qu'un professeur a validé votre code et votre installation de Babel</u>, alors vous pouvez repartir de vos propres fichiers. <br>Si <u>une de ces conditions</u> n'est pas remplie, alors vous pouvez récupérer le dossier "demarrage" de ce TP qui contient une solution (commentée) du précédent TP.***
 
 ### A.1. *Préparatifs :* Installation
-1. **Si vous utilisez le dossier de démarrage fourni dans ce repo (cad. que vous ne repartez pas de vos fichiers du TP précédent), une fois les fichiers récupérés, il faut installer les outils JS néccessaires au bon fonctionnement du projet, notamment le compilateur [Babel](https://babeljs.io).
+1. **Si vous utilisez le dossier de démarrage fourni dans ce repo (cad. que vous ne repartez pas de vos fichiers du TP précédent), une fois les fichiers récupérés, il faut installer les outils JS néccessaires au bon fonctionnement du projet, notamment le compilateur [Babel](https://babeljs.io).**
 
 	Ouvrez un terminal directement dans Visual Studio Code à l'aide du raccourci <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>*</kbd> (ce terminal intégré utilise le terminal par défaut du système, mais vous pouvez le configurer pour utiliser un autre terminal comme Git bash sous windows par exemple) puis tapez :
 	```bash
@@ -101,9 +101,9 @@ Avec le `package.json` on va créer des "raccourcis" pour lancer ces commandes p
 4. **Ajoutez dans le `package.json` un nouveau script nommé "build"** qui permettra de lancer la compilation Babel :
 	```json
 	"scripts": {
-	-	"test": "echo \"Error: no test specified\" && exit 1"
-	+	"test": "echo \"Error: no test specified\" && exit 1",
-	+	"build": "babel js -d build"
+-		"test": "echo \"Error: no test specified\" && exit 1"
++		"test": "echo \"Error: no test specified\" && exit 1",
++		"build": "babel js -d build"
 	},
 	```
 	*Vous noterez que le chemin  `./node_modules/.bin/' n'est plus nécessaire !*
