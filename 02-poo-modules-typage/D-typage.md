@@ -84,9 +84,8 @@ On peut cependant assez facilement rendre tout ça compatible :
 	```json
 	{
 		"presets": [
-	-		["@babel/env", {"modules": false}]
-	+		["@babel/env", {"modules": false}],
-	+		"@babel/flow"
+			["@babel/env", {"modules": false}],
+			"@babel/flow"
 		],
 		"plugins": ["@babel/plugin-proposal-class-properties"],
 	}
