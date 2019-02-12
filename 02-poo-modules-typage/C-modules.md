@@ -21,8 +21,7 @@ Dans un premier temps nous allons mettre de côté ce problème et nous appuyer 
 2. **Il faut ensuite configurer Babel.** En effet, par défaut Babel va chercher à compiler toutes les instructions `import`et `export` qu'il trouvera pour les transformer en code compatible ES5 (mais qui nécessite l'emploi de librairies supplémentaires). Ici on veut utiliser le support natif du navigateur pour les modules ES6, par conséquent il faut indiquer à Babel de ne pas compiler les `import`/`export`. Modifiez le fichier `.babelrc` comme suit (notez le tableau dans un tableau !) :
 	```json
 	"presets": [
-	-	"@babel/env"
-	+	["@babel/env", {"modules": false}]
+		["@babel/env", {"modules": false}]
 	],
 	```
 
@@ -95,10 +94,8 @@ Comme vu en cours, le bundler le plus employé en JS est [Webpack](https://webpa
 
 3. **Modifiez les scripts `"build"` et `"watch"` du fichier `package.json` pour replacer babel par webpack** (*notez quand même que babel sera toujours utilisé, mais c'est webpack qui va directement le piloter*):
 	```json
-	- "build": "babel js -d build",
-	+ "build": "webpack --mode=production",
-    - "watch": "babel js -d build --verbose --watch --source-maps"
-    + "watch": "webpack --mode=development --watch"
+	"build": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch"
 	```
 4. **Lancez la compilation** à l'aide de la commande `watch`
 5. **Enfin, vérifiez dans le navigateur que la page s'affiche toujours** et que dans l'onglet "Réseau"/"Network" vous n'avez maintenant bien plus qu'un seul fichier JS téléchargé par le navigateur : le `build/main.bundle.js`<a href="images/pizzaland-07-modules-webpack.jpg"><img src="images/pizzaland-07-modules-webpack.jpg" width="80%"></a>
