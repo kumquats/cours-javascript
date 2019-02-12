@@ -170,7 +170,7 @@ Pour pouvoir utiliser ces syntaxes, nous allons modifier la configuration de Bab
 
 	Testez votre classe avec le code suivant :
 	```js
-	const title = new Component( 'h1', ['La', ' ', 'carte'] );
+	const title = new Component( 'h1', null, ['La', ' ', 'carte'] );
 	document.querySelector('.pageTitle').innerHTML = title.render();
 	```
 
