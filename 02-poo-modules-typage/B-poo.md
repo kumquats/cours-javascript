@@ -141,7 +141,7 @@ Pour pouvoir utiliser ces syntaxes, nous allons modifier la configuration de Bab
 	```
 6. **Modifiez la méthode `render()` pour prendre en compte le paramètre `attribute`**. On considère que ce paramètre aura toujours la forme d'un objet littéral avec deux propriétés : `name` et `value`. Si le paramètre `attribute` a été fourni au constructeur comme ceci :
 	```js
-	const img = new Component( 'img', null, {name:'src', value:'images/regina.jpg'} );
+	const img = new Component( 'img', {name:'src', value:'images/regina.jpg'} );
 	```
 	`render()` doit retourner un code du type :
 	```html
@@ -162,7 +162,7 @@ Pour pouvoir utiliser ces syntaxes, nous allons modifier la configuration de Bab
 	Le rendu doit être identique à la capture précédente : <br><a href="images/pizzaland-03.jpg"><img src="images/pizzaland-03.jpg" width="80%"></a>
 
 ### B.5. *Composition :* La classe PizzaThumbnail
-1. **Modifiez le code de la méthode render pour permettre à la classe Component de recevoir dans le paramètre `children` un tableau de chaînes de caractères.** <br>Par exemple : si `tag` vaut `"div"` et que `children` vaut `[ "youpi", "ça", "marche" ]` alors `render()` retournera la chaîne `"<div>youpiçamarche</div>"`.
+1. **Modifiez le code de la méthode render pour permettre à la classe Component de recevoir dans le paramètre `children` soit une chaine de caractères (comme c'est le cas actuellement) soit un tableau de chaînes de caractères.** <br>Par exemple : si `tag` vaut `"div"` et que `children` vaut `[ "youpi", "ça", "marche" ]` alors `render()` retournera la chaîne `"<div>youpiçamarche</div>"`.
 
 	Pour ne pas alourdir trop le code de la méthode render() et pour avoir un code plus lisible, passez le code de rendu des enfants, dans une méthode `renderChildren()`.
 
@@ -200,21 +200,26 @@ Pour pouvoir utiliser ces syntaxes, nous allons modifier la configuration de Bab
 3. **Créez une classe `PizzaThumbnail`** qui hérite de la classe `Component` :
 	+ le constructeur prend en paramètre un objet nommé `pizza` dont le format correspond à celui d'un élément du tableau `data` (cad. propriétés `nom`, `base`, `prix_petite`, `prix_grande`)
 	+ la méthode `render()` retourne un code du type :
-	```html
-	<article class="media">
-		<a href="images/regina.jpg">
-			<img src="images/regina.jpg" />
-			<section class="infos">
-				<h4>Regina</h4>
-				<ul>
-					<li>Prix petit format : 5.50 €</li>
-					<li>Prix grand format : 7.50 €</li>
-				</ul>
-			</section>
-		</a>
-	</article>
-	```
+		```html
+		<article class="media">
+			<a href="images/regina.jpg">
+				<img src="images/regina.jpg" />
+				<section class="infos">
+					<h4>Regina</h4>
+					<ul>
+						<li>Prix petit format : 5.50 €</li>
+						<li>Prix grand format : 7.50 €</li>
+					</ul>
+				</section>
+			</a>
+		</article>
+		```
 	+ la classe `PizzaThumbnail` devra utiliser la classe `Img` pour le rendu de l'image de la pizza.
+	+ Testez la classe `PizzaThumbnail` avec le code suivant :
+		```js
+		const pt = new PizzaThumbnail(data[0]);
+		document.querySelector( '.pizzasContainer' ).innerHTML = pt.render();
+		```
 
 4. **Créez enfin une classe `HomePage` qui hérite de `Component`** :
 	-  le constructeur recevra en paramètre le tableau `data`
