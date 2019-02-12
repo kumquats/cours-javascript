@@ -6,5 +6,7 @@ import PageRenderer from './PageRenderer.js';
 PageRenderer.titleElement = document.querySelector('.pageTitle');
 PageRenderer.contentElement = document.querySelector('.pizzasContainer');
 
-const homePage:HomePage = new HomePage(data);
-PageRenderer.renderPage( homePage );
+const homePage:HomePage = new HomePage([]);
+PageRenderer.renderPage( homePage ); // page vide
+homePage.data = data;
+PageRenderer.renderPage( homePage ); // liste des vidéos

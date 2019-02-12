@@ -186,15 +186,23 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _classPrivateFieldGet(receiver, privateMap) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } var descriptor = privateMap.get(receiver); if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+function _classPrivateFieldSet(receiver, privateMap, value) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to set private field on non-instance"); } var descriptor = privateMap.get(receiver); if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } return value; }
 
 
 
@@ -205,16 +213,37 @@ var HomePage =
 function (_Page) {
   _inherits(HomePage, _Page);
 
-  function HomePage(data) {
+  function HomePage(_data2) {
+    var _this;
+
     _classCallCheck(this, HomePage);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(HomePage).call(this, 'La carte', data.map(function (pizza) {
-      return new _PizzaThumbnail_js__WEBPACK_IMPORTED_MODULE_1__["default"](pizza);
-    })));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(HomePage).call(this, 'La carte'));
+
+    _data.set(_assertThisInitialized(_assertThisInitialized(_this)), {
+      writable: true,
+      value: void 0
+    });
+
+    _this.data = _data2;
+    return _this;
   }
+
+  _createClass(HomePage, [{
+    key: "data",
+    set: function set(value) {
+      _classPrivateFieldSet(this, _data, value);
+
+      this.children = _classPrivateFieldGet(this, _data).map(function (pizza) {
+        return new _PizzaThumbnail_js__WEBPACK_IMPORTED_MODULE_1__["default"](pizza);
+      });
+    }
+  }]);
 
   return HomePage;
 }(_Page_js__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+var _data = new WeakMap();
 
 
 
@@ -498,75 +527,11 @@ __webpack_require__.r(__webpack_exports__);
 
 _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].titleElement = document.querySelector('.pageTitle');
 _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].contentElement = document.querySelector('.pizzasContainer');
-var homePage = new _HomePage_js__WEBPACK_IMPORTED_MODULE_0__["default"](_data_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
-_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(homePage);
-/*
+var homePage = new _HomePage_js__WEBPACK_IMPORTED_MODULE_0__["default"]([]);
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(homePage); // page vide
 
-
-class Input extends Component {
-	name;
-	constructor( type, name, label, attributes ){
-		super( 'input', {...attributes, type, name} );
-		this.name = name;
-		this.label = label;
-	}
-	render(){
-		return `<label>
-			${(this.label)}
-			${super.render()}
-		</label>`;
-	}
-}
-class Select extends Component {
-	#options = [];
-	constructor(name, options = [], attributes) {
-		super('select', {...attributes, name} );
-		this.options = options;
-	}
-	set options( value ){
-		this.#options = value;
-		this.children = this.#options.map(
-			option => new Component('option', {value: option.value || option}, [option.label || option] )
-		)
-	}
-}
-
-class AddPizzaPage extends Page {
-	#ingredients = [];
-
-	constructor( ingredients ){
-		super( 'Ajouter une pizza', 'addPizzaPage', ['form']);
-		this.ingredients = ingredients;
-	}
-
-	set ingredients( value ){
-		this.#ingredients = value;
-		this.computeChildren();
-	}
-
-	computeChildren(){
-		this.children = [
-			new Component('form', null, [
-				new Input('text', 'nom', 'Nom de la pizza'),
-				new Select('base', ['tomate', 'crème'] ),
-				new Input('number', 'prix_petite', 'Prix petite taille :', {step:0.05,min:0,max:20} ),
-				new Input('number', 'prix_grande', 'Prix grande taille :', {step:0.05,min:0,max:20} ),
-				new Select('ingredients', this.#ingredients.map( ingredient => ({value:ingredient.id, label:ingredient.nom})), {multiple:true}),
-				new Component('button', null, ['Ajouter'])
-			])
-		];
-	}
-
-}
-
-const addPizzaPage = new AddPizzaPage([
-	{id:1, nom:'Mozzarella'},
-	{id:2, nom:'Jambon'},
-	{id:3, nom:'Champignon'},
-	{id:4, nom:'Olives'},
-]);
-PageRenderer.renderPage(addPizzaPage);
-*/
+homePage.data = _data_js__WEBPACK_IMPORTED_MODULE_1__["default"];
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(homePage); // liste des vidéos
 
 /***/ })
 
