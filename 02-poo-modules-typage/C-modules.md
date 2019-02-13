@@ -15,7 +15,7 @@ Dans un premier temps nous allons mettre de côté ce problème et nous appuyer 
 ### C.1. Le support natif des modules dans les navigateurs modernes
 1.  **Avant d'utiliser le système de modules et les instructions `import`/`export`, il faut indiquer au navigateur que notre fichier main.js est lui même un module.** Pour cela, ajouter un attribut `type="module"` dans la balise `<script>` du fichier `index.html` :
 	```html
-	<script type="module" src="js/main.js"></script>
+	<script type="module" src="build/main.js"></script>
 	```
 	Vous notez que l'attribut `"defer"` n'est plus nécessaire car il est implicite pour les modules.
 2. **Il faut ensuite configurer Babel.** En effet, par défaut Babel va chercher à compiler toutes les instructions `import`et `export` qu'il trouvera pour les transformer en code compatible ES5 (mais qui nécessite l'emploi de librairies supplémentaires). Ici on veut utiliser le support natif du navigateur pour les modules ES6, par conséquent il faut indiquer à Babel de ne pas compiler les `import`/`export`. Modifiez le fichier `.babelrc` comme suit (notez le tableau dans un tableau !) :
@@ -24,6 +24,7 @@ Dans un premier temps nous allons mettre de côté ce problème et nous appuyer 
 		["@babel/env", {"modules": false}]
 	],
 	```
+	Pour prendre en compte la nouvelle configuration de Babel, stoppez (<kbd>CTRL</kbd>+<kbd>C</kbd> puis relancez la compilation à l'aide de la commande `npm run watch`
 
 3.  **Passez enfin la variable `data` ainsi que les classes `Component`, `Img`, `PizzaThumbnail` et `HomePage` dans des modules ES6 distincts (un module par classe)**. Rappelez vous, tout ce qui est défini dans un module (variables, fonctions, classes), n'existe qu'à l'intérieur du module sauf s'il est exporté puis importé dans un autre fichier.
 
@@ -95,9 +96,9 @@ Comme vu en cours, le bundler le plus employé en JS est [Webpack](https://webpa
 3. **Modifiez les scripts `"build"` et `"watch"` du fichier `package.json` pour replacer babel par webpack** (*notez quand même que babel sera toujours utilisé, mais c'est webpack qui va directement le piloter*):
 	```json
 	"build": "webpack --mode=production",
-    "watch": "webpack --mode=development --watch"
+	"watch": "webpack --mode=development --watch"
 	```
-4. **Lancez la compilation** à l'aide de la commande `watch`
+4. **Lancez la compilation** : stoppez le watch précédent (<kbd>CTRL</kbd>+<kbd>C</kbd>) et relancez la compilation à l'aide de la commande `npm run watch` (*qui lancera cette fois webpack et plus Babel*)
 5. **Enfin, vérifiez dans le navigateur que la page s'affiche toujours** et que dans l'onglet "Réseau"/"Network" vous n'avez maintenant bien plus qu'un seul fichier JS téléchargé par le navigateur : le `build/main.bundle.js`<a href="images/pizzaland-07-modules-webpack.jpg"><img src="images/pizzaland-07-modules-webpack.jpg" width="80%"></a>
 
 ## Étape suivante
