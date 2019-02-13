@@ -41,7 +41,7 @@ Celle que nous allons employer aujourd'hui se base sur [Flow](https://flow.org/)
    // @flow
    const i:number = '12';
    ```
-2. **Relancez la commande `./node_modules/.bin/flow`.** Cette fois plusieurs erreurs doivent apparaître dans votre terminal :
+2. **Relancez la commande `./node_modules/.bin/flow`** (*pensez à stopper le `watch`précédent s'il tournait toujours <kbd>CTRL</kbd>+<kbd>C</kbd>)*. Cette fois plusieurs erreurs doivent apparaître dans votre terminal :
 	<br><a href="images/flow-error.jpg"><img src="images/flow-error.jpg" width="80%"></a>
 
 	On a en réalité 3 erreurs :
@@ -90,7 +90,7 @@ On peut cependant assez facilement rendre tout ça compatible :
 		"plugins": ["@babel/plugin-proposal-class-properties"],
 	}
 	```
-3. **Relancez la compilation à l'aide de la commande `npm run build` ou `npm run watch`**, vérifiez que tout compile correctement et que l'affichage dans le navigateur est inchangé.
+3. **Relancez la compilation à l'aide de la commande `npm run build` ou `npm run watch`** (*pensez à stopper le `watch`précédent s'il tournait toujours <kbd>CTRL</kbd>+<kbd>C</kbd>)*, vérifiez que tout compile correctement et que l'affichage dans le navigateur est inchangé.
 
 ### D.4. Intégration dans Visual Studio Code
 Pour permettre à Visual Studio Code de comprendre les informations de typage flow, installez l'extension : https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
