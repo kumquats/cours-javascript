@@ -1,23 +1,28 @@
-# TP 3 - L'API DOM <!-- omit in toc -->
+#### TP3 - API DOM <!-- omit in toc -->
+# A. Rappels modules & typage <!-- omit in toc -->
 
 ## Sommaire <!-- omit in toc -->
-- [A. Rappels modules & typage](#a-rappels-modules--typage)
-	- [A.1. Les modules](#a1-les-modules)
-	- [A.2. Le typage](#a2-le-typage)
-	- [D.4. Intégration dans Visual Studio Code](#d4-intégration-dans-visual-studio-code)
+- [A.1. Les modules](#a1-les-modules)
+	- [A.1.1. Rappels du cours](#a11-rappels-du-cours)
+	- [A.1.2. Installation](#a12-installation)
+	- [A.1.3. Exercice](#a13-exercice)
+- [A.2. Le typage](#a2-le-typage)
+	- [A.2.1. Installation](#a21-installation)
+	- [A.2.2. Premiers tests](#a22-premiers-tests)
+	- [A.2.3. Exercice](#a23-exercice)
+- [D.4. Intégration dans Visual Studio Code](#d4-intégration-dans-visual-studio-code)
 
-## A. Rappels modules & typage
 ***Cette partie est destiné à ceux qui n'auraient pas terminé le précédent TP et notamment les parties "modules" et "typage".***
 
-Si vous n'avez fini ni la partie [C. Modules](../02-poo-modules-typage/C-modules.md) ni la partie [D. Typage](../02-poo-modules-typage/D-typage.md) alors rendez-vous à la partie [A.1. Les modules](#a1-les-modules).
+Si vous n'avez fini ni la partie [C. Modules](../02-poo-modules-typage/C-modules.md) ni la partie [D. Typage](../02-poo-modules-typage/D-typage.md) alors commencez par la partie [A.1. Les modules](#a1-les-modules).
 
 Si vous aviez terminé la partie [C. Modules](../../../02-poo-modules-typage/C-modules.md) mais pas eu le temps de finir l'exercice [D. Typage](../02-poo-modules-typage/D-typage.md) alors vous pouvez aller directement à la partie [A.2. Le typage](#a2-le-typage)
 
-Enfin si vous aviez réussi à terminer ces deux exercices du précédent TP, alors vous pouvez ignorer ces rappels et passer directement à l'exercice [B. Les bases](./B-les-bases.md).
+Enfin si vous aviez réussi à terminer ces deux exercices du précédent TP, félicitations, vous pouvez ignorer ces rappels et passer directement à l'exercice [B. Les bases](./B-les-bases.md).
 
-### A.1. Les modules
+## A.1. Les modules
 
-#### A.1.1. Rappels du cours
+### A.1.1. Rappels du cours
 **Comme vu en cours, le système de modules ES6 permet de répartir son code dans plusieurs fichiers et de gérer les dépendances de l'application fichier par fichier plutôt que d'avoir à maintenir une liste exhaustive des scripts à charger dans le fichier html.**
 
 Pour rappel, le système de modules s'utilise grâce à des instructions `import` et `export` :
@@ -39,7 +44,7 @@ Le [support navigateur des modules ES6](https://caniuse.com/#feat=es6-module) es
 
 Comme vu en cours n°2, le bundler le plus employé en JS est [Webpack](https://webpack.js.org/), c'est cet outil que l'on va utiliser.
 
-#### A.1.2. Installation
+### A.1.2. Installation
 1. **Récupérez le contenu du dossier `demarrage-modules`, il contient une solution du TP sur la POO qui servira de base pour ce TP sur les modules.** Comme lors du TP précédent n'oubliez pas de lancer un serveur web dans ce dossier
 	```bash
 	cd /chemin/vers/votre/dossier/demarrage-modules
@@ -54,7 +59,7 @@ Comme vu en cours n°2, le bundler le plus employé en JS est [Webpack](https://
 	(à lancer à la racine du dossier de votre projet, cad là où se trouve le fichier `package.json`)
 
 	*Si vous voulez en savoir plus sur le détail de l'installation et de la configuration de webpack vous pouvez consulter [l'exercice C.2. tu TP précédent](../02-poo-modules-typage/C-modules.md#c2-rendre-les-modules-compatibles-avec-les-vieux-navigateurs).*
-#### A.1.3. Exercice
+### A.1.3. Exercice
 3. **Créez votre premier module :** Créez un fichier `data.js` dans lequel vous allez déplacer la définition de la constante `data` (qui était jusque là dans le fichier `main.js`) :
 	```js
 	const data =  [
@@ -83,13 +88,13 @@ Comme vu en cours n°2, le bundler le plus employé en JS est [Webpack](https://
 	Pensez à vérifier régulièrement que la commande `npm run watch` que vous avez lancée au point n°2 ne retourne pas d'erreur et que la page continue de s'afficher correctement dans le navigateur !
 
 
-### A.2. Le typage
+## A.2. Le typage
 
 Pour typer statiquement notre code JS (*càd. assigner un type fixe à une variable au moment de sa déclaration*) nous allons utiliser [Flow](https://flow.org/).
 
 ***NB:** Si vous venez de terminer le précédent exercice ([A.1. Les modules](#a1-les-modules)) vous pouvez passer directement à la partie [A.2.3. Exercice](#a23-exercice).*
 
-#### A.2.1. Installation
+### A.2.1. Installation
 1. **Récupérez le contenu du dossier `demarrage-typage`, il contient une solution du TP précédent sur les modules qui servira de base pour ce TP sur le typage.** Comme lors du TP précédent n'oubliez pas de lancer un serveur web dans ce dossier
 	```bash
 	cd /chemin/vers/votre/dossier/demarrage-typage
@@ -105,7 +110,7 @@ Pour typer statiquement notre code JS (*càd. assigner un type fixe à une varia
 
 	*Si vous voulez en savoir plus sur le détail de l'installation et de la configuration de Flow vous pouvez consulter [l'exercice D.1. du TP précédent](../02-poo-modules-typage/D-typage.md#d1-installation-et-configuration)*
 
-#### A.2.2. Premiers tests
+### A.2.2. Premiers tests
 1. **Dans le fichier `js/main.js` ajoutez le commentaire suivant (au début du fichier) qui permet d'indiquer à Flow que ce fichier contient des informations de typage :**
    ```js
    // @flow
@@ -147,7 +152,7 @@ Pour typer statiquement notre code JS (*càd. assigner un type fixe à une varia
 	```
 	**vous n'avez en principe plus d'erreur !**
 
-#### A.2.3. Exercice
+### A.2.3. Exercice
 **Maintenant que l'on a réglé les bugs potentiels de notre code, on peut ajouter les informations de typage aux différents fichiers de notre application.**
 
 1. A l'aide du support PDF du cours (disponible sur moodle) et de [la documentation de Flow](https://flow.org/en/docs/types/), Typez le module `Component` :
@@ -176,7 +181,7 @@ Pour typer statiquement notre code JS (*càd. assigner un type fixe à une varia
 
 <div style="color:red">
 
-### D.4. Intégration dans Visual Studio Code
+## D.4. Intégration dans Visual Studio Code
 
 Pour permettre à Visual Studio Code de comprendre les informations de typage flow, installez l'extension : https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
 
