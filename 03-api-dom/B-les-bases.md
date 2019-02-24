@@ -79,4 +79,4 @@ Les méthodes `getAttribute()` et `setAttribute()` de la classe Element permette
 2. Ajoutez la classe CSS "active" au `<li>` qui contient le lien "La carte" dans le menu
 
 ## Étape suivante
-Maintenant que l'on est capable de sélectionner / modifier des éléments HTML, nous allons voir dans le prochain exercice comment détecter les événements : [Les événements](./C-evenements.md).
+Maintenant que l'on est capable de sélectionner / modifier des éléments HTML, nous allons voir dans le prochain exercice comment détecter les événements : [C. Les événements](./C-evenements.md).
