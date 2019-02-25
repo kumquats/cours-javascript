@@ -27,7 +27,7 @@
 	```
 	(à lancer à la racine du dossier de votre projet, cad là où se trouve le fichier `package.json`)
 
-	*Si vous voulez en savoir plus sur le détail de l'installation et de la configuration des différents outils, vous pouvez consulter les TPs précédents.*
+	*Si vous voulez en savoir plus sur le détail de l'installation et de la configuration des différents outils, vous pouvez consulter les TPs précédents : [modules](../02-poo-modules-typage/C-modules.md#c2-rendre-les-modules-compatibles-avec-les-vieux-navigateurs) et [typage](../02-poo-modules-typage/D-typage.md#d1-installation-et-configuration).*
 
 ## A.2. Sélectionner des éléments
 
