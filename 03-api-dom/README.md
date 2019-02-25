@@ -9,7 +9,6 @@
 ## Sommaire
 Pour plus de clarté, les instructions du TP se trouvent dans des fichiers distincts (un fichier par sujet), procédez dans l'ordre sinon, ça fonctionnera beaucoup moins bien ! :
 
-1. [A. Rappels modules et typage](A-rappels-modules-typage.md)
 2. [B. Les bases de l'API DOM](B-les-bases.md)
 3. [C. Les événements](C-evenements.md)
 4. [D. Les formulaires](D-formulaires.md)
