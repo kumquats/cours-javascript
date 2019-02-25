@@ -1,20 +1,20 @@
 #### TP3 - API DOM <!-- omit in toc -->
-# D. La gestion des formulaires <!-- omit in toc -->
+# C. La gestion des formulaires <!-- omit in toc -->
 
 ## Sommaire <!-- omit in toc -->
-- [D.1. Rappels](#d1-rappels)
-- [D.2. Préparatifs](#d2-préparatifs)
-- [D.3. Le formulaire d'ajout de pizza](#d3-le-formulaire-dajout-de-pizza)
-- [D.4. La validation de la saisie](#d4-la-validation-de-la-saisie)
-- [D.5. Le formulaire complet :](#d5-le-formulaire-complet-)
+- [C.1. Rappels](#c1-rappels)
+- [C.2. Préparatifs](#c2-préparatifs)
+- [C.3. Le formulaire d'ajout de pizza](#c3-le-formulaire-dajout-de-pizza)
+- [C.4. La validation de la saisie](#c4-la-validation-de-la-saisie)
+- [C.5. Le formulaire complet :](#c5-le-formulaire-complet-)
 
-## D.1. Rappels
+## C.1. Rappels
 Comme vu en cours (cf. pdf sur moodle), on peut utiliser l'API DOM avec les formulaires principalement pour 3 utilisations :
 - vérifier la saisie de l'utilisateur et afficher des messages d'erreur si besoin
 - modifier éventuellement les valeurs des champs (corriger une valeur, ou vider un formulaire)
 - Soumettre les données en AJAX (ce qui sera abordé dans le prochain cours et TP)
 
-## D.2. Préparatifs
+## C.2. Préparatifs
 Avant d'aller plus loin dans le TP faisons un point sur le code qui est fourni dans le dossier `demarrage` : il contient en effet des classes `Page` et `PageRenderer` qui correspondent à la solution de l'exercice [E. pour aller plus loin](../02-poo-modules-typage/E-pour-aller-plus-loin.md) :
 
 - La classe `Page` est une classe de base dont hérite la classe `HomePage` et qui implémente une méthode `renderTitle()`.
@@ -37,7 +37,7 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	}
 	```
 
-## D.3. Le formulaire d'ajout de pizza
+## C.3. Le formulaire d'ajout de pizza
 1. **Créez la classe `AddPizzaPage`** (dans un module `js/AddPizzaPage.js`) dont le titre est "Ajouter une pizza" et dont la méthode `render()` fonctionne comme suit :
 	```js
 	render():string {
@@ -79,12 +79,12 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	}
 	```
 
-## D.4. La validation de la saisie
+## C.4. La validation de la saisie
 1. **Au submit afficher dans la console la valeur saisie dans le champ "nom"**
 2. **Si le champ "nom" est vide, afficher un message d'erreur** à l'aide de la fonction [`alert()`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert)
 3. **Si le champ "nom" n'est pas vide, afficher un message de succès avec la fonction `alert()` et vider le champ de saisie**.
 
-## D.5. Le formulaire complet :
+## C.5. Le formulaire complet :
 Coder le formulaire complet de création de pizza selon le code HTML suivant (tous les champs sont obligatoires) :
 ```html
 <form class="add-pizza-page">

@@ -1,19 +1,19 @@
 #### TP3 - API DOM <!-- omit in toc -->
-# B. Les bases de l'API DOM <!-- omit in toc -->
+# A. Les bases de l'API DOM <!-- omit in toc -->
 
 ## Sommaire <!-- omit in toc -->
-- [B.1. Installation](#b1-installation)
-- [B.2. Sélectionner des éléments](#b2-sélectionner-des-éléments)
-	- [B.2.1 querySelector()](#b21-queryselector)
-	- [B.2.2. querySelectorAll()](#b22-queryselectorall)
-- [B.3. Modifier des éléments](#b3-modifier-des-éléments)
-	- [B.3.1. innerHTML](#b31-innerhtml)
-	- [B.3.2. getAttribute/setAttribute](#b32-getattributesetattribute)
+- [A.1. Installation](#a1-installation)
+- [A.2. Sélectionner des éléments](#a2-sélectionner-des-éléments)
+	- [A.2.1 querySelector()](#a21-queryselector)
+	- [A.2.2. querySelectorAll()](#a22-queryselectorall)
+- [A.3. Modifier des éléments](#a3-modifier-des-éléments)
+	- [A.3.1. innerHTML](#a31-innerhtml)
+	- [A.3.2. getAttribute/setAttribute](#a32-getattributesetattribute)
 - [Étape suivante](#Étape-suivante)
 
 ***Ce TP va permettre de mettre en oeuvre les principales méthodes de sélection et de modification d'éléments de l'arbre DOM.***
 
-## B.1. Installation
+## A.1. Installation
 1. **Récupérez le contenu du dossier `demarrage`, il contient une solution du TP sur la POO, les modules et le typage qui servira de base pour ce TP sur l'API DOM.** Comme lors du TP précédent n'oubliez pas de lancer un serveur web dans ce dossier
 	```bash
 	cd /chemin/vers/votre/dossier/demarrage
@@ -29,9 +29,9 @@
 
 	*Si vous voulez en savoir plus sur le détail de l'installation et de la configuration des différents outils, vous pouvez consulter les TPs précédents.*
 
-## B.2. Sélectionner des éléments
+## A.2. Sélectionner des éléments
 
-### B.2.1 querySelector()
+### A.2.1 querySelector()
 Comme vu en cours, la principale méthode pour sélectionner un élément de la page HTML est la méthode `querySelector()`.
 
 querySelector() est une méthode de la classe Element qui permet de retourner une référence vers un élément de la page (une balise) à partir d'un sélecteur CSS. Par exemple :
@@ -54,15 +54,15 @@ Afficher dans la console :
 4. Le lien vers le site [Unsplash](https://unsplash.com/) dans les crédits
 5. le titre de la première pizza (*`<h4>Regina</h4>`*)
 
-### B.2.2. querySelectorAll()
+### A.2.2. querySelectorAll()
 La méthode `querySelectorAll()` permet de récupérer non pas un, mais tous les éléments qui correspondent au sélecteur CSS passé en paramètre.
 
 Affichez dans la console :
 1. la liste des liens du menu de navigation ("La carte" et "Ajouter une pizza")
 2. la liste des ingrédients de toutes les pizzas de la page
 
-## B.3. Modifier des éléments
-### B.3.1. innerHTML
+## A.3. Modifier des éléments
+### A.3.1. innerHTML
 La propriété `innerHTML` permet à la fois de lire et de modifier le contenu d'un Element HTML (le contenu HTML compris entre les balises ouvrantes et fermantes)
 
 1. Affichez dans la console le titre de la deuxième pizza (*"Napolitaine"*)
@@ -72,7 +72,7 @@ La propriété `innerHTML` permet à la fois de lire et de modifier le contenu d
 	<em>les pizzas c'est la vie</em>
 	```
 
-### B.3.2. getAttribute/setAttribute
+### A.3.2. getAttribute/setAttribute
 Les méthodes `getAttribute()` et `setAttribute()` de la classe Element permettent de lire, d'ajouter ou de modifier des attributs HTML.
 
 1. Affichez dans la console l'url du 2e lien contenu dans le footer (`"https://www.freepik.com/"`)
