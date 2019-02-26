@@ -65,7 +65,7 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	Cette méthode va pour le moment juste afficher un message dans la console.
 
 	***NB:** Souvenez vous de la méthode `event.preventDefault()`...*
-3. **Overrider la méthode `mount()` dans la classe `AddPizzaPage`** et y ajouter un écouteur d'événement 'submit' sur la balise `<form class="addPizzaPage">` qui va déclencer la méthode `submit()` de l'instance.
+3. **Overridez la méthode `mount()` dans la classe `AddPizzaPage`** en y ajoutant un écouteur d'événement 'submit' sur la balise `<form class="addPizzaPage">` qui va déclencer la méthode `submit()` de l'instance.
 
 	***NB :** Pour rappel, la valeur du `this` à l'intérieur d'un écouteur d'événement (fonction appelée par addEventListener) est toujours l'élément HTML qui a déclenché l'événement (ici le formulaire). Pour pouvoir appeler une méthode de l'instance, il faut forcer la valeur du `this` pour qu'elle corresponde toujours à l'instance dans laquelle le code s'exécute. Comme expliqué dans le pdf du cours, il existe plusieurs manières de le faire, mais celle que je vous recommande est l'emploi de la méthode [`bind()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) dans le constructeur de la classe :*
 	```js
@@ -81,9 +81,10 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	```
 
 ## C.4. La validation de la saisie
-1. **Au submit afficher dans la console la valeur saisie dans le champ "nom"**
-2. **Si le champ "nom" est vide, afficher un message d'erreur** à l'aide de la fonction [`alert()`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert)
-3. **Si le champ "nom" n'est pas vide, afficher une alerte "La pizza xxxxx a été ajoutée"** (où "xxxxx" correspond au nom qu'a saisi l'utilisateur) **et vider le champ de saisie** pour permettre à l'utilisateur de saisir une nouvelle pizza.
+1. **Au submit afficher dans la console la valeur saisie dans le champ "nom"**. Un sélecteur CSS qui peut être utile ici est le [sélecteur d'attributs](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors).
+
+3. **Si le champ "nom" est vide, afficher un message d'erreur** à l'aide de la fonction [`alert()`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert)
+4. **Si le champ "nom" n'est pas vide, afficher une alerte "La pizza xxxxx a été ajoutée"** (où "xxxxx" correspond au nom qu'a saisi l'utilisateur) **et vider le champ de saisie** pour permettre à l'utilisateur de saisir une nouvelle pizza.
 
 ## C.5. Le formulaire complet :
 Coder le formulaire complet de création de pizza selon le code HTML suivant (tous les champs sont obligatoires) :
@@ -102,11 +103,11 @@ Coder le formulaire complet de création de pizza selon le code HTML suivant (to
 	</label>
 	<label>
 		Prix petit format :
-		<input type="number" name="prix_petite" class="form-control">
+		<input type="number" name="prix_petite" class="form-control" step="0.05">
 	</label>
 	<label>
 		Prix grand format :
-		<input type="number" name="prix_grande" class="form-control">
+		<input type="number" name="prix_grande" class="form-control" step="0.05">
 	</label>
 	<label>
 		Ingrédients :
@@ -120,3 +121,5 @@ Coder le formulaire complet de création de pizza selon le code HTML suivant (to
 	<button type="submit" class="btn btn-default">Ajouter</button>
 </form>
 ```
+
+***NB:** Pour récupérer la valeur contenue dans un champ `<select>` ce n'est pas la propriété `value` qu'il faut utiliser mais `selectedOptions` (https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions). Cette propriété retourne un tableau des valeurs sélectionnées, si le tableau est vide, c'est qu'aucune valeur n'a été choisie par l'utilisateur.*
