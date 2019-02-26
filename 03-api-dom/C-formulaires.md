@@ -71,9 +71,10 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	```js
 	class maClasse {
 		constructor(){
+			// $FlowFixMe : pour dire à flow d'ignorer la ligne suivante
 			this.onClick = this.onClick.bind(this)
 		}
-		onClick(event:Event) {
+		onClick(event:Event):void {
 			// this est correct !
 		}
 	}
