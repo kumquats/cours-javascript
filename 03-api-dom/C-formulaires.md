@@ -38,10 +38,10 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	```
 
 ## C.3. Le formulaire d'ajout de pizza
-1. **Créez la classe `AddPizzaPage`** (dans un module `js/AddPizzaPage.js`) dont le titre est "Ajouter une pizza" et dont la méthode `render()` fonctionne comme suit :
+1. **Créez la classe `AddPizzaPage`** (dans un module `js/AddPizzaPage.js`) dont le titre est "Ajouter une pizza" et dont la méthode `render()` est surchargée comme suit :
 	```js
 	render():string {
-		return `<form class="add-pizza-page">
+		return `<form class="addPizzaPage">
 			<label>
 				Nom :
 				<input type="text" name="nom" >
@@ -51,7 +51,7 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	}
 	```
 
-2. **Dans le fichier `main.js` instanciez la classe `AddPizzaPage` puis ajoutez un écouteur d'événement "click" sur le lien "Ajouter une pizza"** qui permet d'afficher la `AddPizzaPage` à l'aide de `PageRenderer` :
+2. **Dans le fichier `main.js` instanciez la classe `AddPizzaPage` puis, au "click" sur le lien "Ajouter une pizza"** affichez la `AddPizzaPage` à l'aide de `PageRenderer` :
 	```js
 	// addPizzaPage est une instance de la classe AddPizzaPage
 	PageRenderer.renderPage( addPizzaPage );
@@ -67,7 +67,7 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 	***NB:** Souvenez vous de la méthode `event.preventDefault()`...*
 3. **Overrider la méthode `mount()` dans la classe `AddPizzaPage`** et y ajouter un écouteur d'événement 'submit' sur la balise `<form class="addPizzaPage">` qui va déclencer la méthode `submit()` de l'instance.
 
-	***NB :** Pour rappel, la valeur du `this` à l'intérieur d'un écouteur d'événement (fonction appelée par addEventListener) est toujours l'élément HTML qui a déclenché l'événement (ici le formulaire). Pour pouvoir appeler une méthode de l'instance, il faut forcer la valeur du `this` à l'instance dans laquelle le code s'exécute. Comme expliqué dans le pdf du cours, il existe plusieurs manières de le faire, mais celle que je vous recommande est l'emploi de la méthode [`bind()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) dans le constructeur de la classe :*
+	***NB :** Pour rappel, la valeur du `this` à l'intérieur d'un écouteur d'événement (fonction appelée par addEventListener) est toujours l'élément HTML qui a déclenché l'événement (ici le formulaire). Pour pouvoir appeler une méthode de l'instance, il faut forcer la valeur du `this` pour qu'elle corresponde toujours à l'instance dans laquelle le code s'exécute. Comme expliqué dans le pdf du cours, il existe plusieurs manières de le faire, mais celle que je vous recommande est l'emploi de la méthode [`bind()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) dans le constructeur de la classe :*
 	```js
 	class maClasse {
 		constructor(){
@@ -82,7 +82,7 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 ## C.4. La validation de la saisie
 1. **Au submit afficher dans la console la valeur saisie dans le champ "nom"**
 2. **Si le champ "nom" est vide, afficher un message d'erreur** à l'aide de la fonction [`alert()`](https://developer.mozilla.org/fr/docs/Web/API/Window/alert)
-3. **Si le champ "nom" n'est pas vide, afficher un message de succès avec la fonction `alert()` et vider le champ de saisie**.
+3. **Si le champ "nom" n'est pas vide, afficher une alerte "La pizza xxxxx a été ajoutée"** (où "xxxxx" correspond au nom qu'a saisi l'utilisateur) **et vider le champ de saisie** pour permettre à l'utilisateur de saisir une nouvelle pizza.
 
 ## C.5. Le formulaire complet :
 Coder le formulaire complet de création de pizza selon le code HTML suivant (tous les champs sont obligatoires) :

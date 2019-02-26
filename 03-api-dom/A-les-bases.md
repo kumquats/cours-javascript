@@ -4,7 +4,7 @@
 ## Sommaire <!-- omit in toc -->
 - [A.1. Installation](#a1-installation)
 - [A.2. Sélectionner des éléments](#a2-sélectionner-des-éléments)
-	- [A.2.1 querySelector()](#a21-queryselector)
+	- [A.2.1. querySelector()](#a21-queryselector)
 	- [A.2.2. querySelectorAll()](#a22-queryselectorall)
 - [A.3. Modifier des éléments](#a3-modifier-des-éléments)
 	- [A.3.1. innerHTML](#a31-innerhtml)
@@ -31,7 +31,7 @@
 
 ## A.2. Sélectionner des éléments
 
-### A.2.1 querySelector()
+### A.2.1. querySelector()
 Comme vu en cours, la principale méthode pour sélectionner un élément de la page HTML est la méthode `querySelector()`.
 
 querySelector() est une méthode de la classe Element qui permet de retourner une référence vers un élément de la page (une balise) à partir d'un sélecteur CSS. Par exemple :
@@ -48,11 +48,14 @@ Dans le fichier `main.js`, sélectionnez les éléments suivants et affichez les
 console.log( document.querySelector('#appContainer') );
 ```
 
-Afficher dans la console :
+En inspectant le code html de la page (à l'aide de l'onglet Elements/Inspecteur des devtools) trouvez les sélecteurs qui permettront d'afficher dans la console :
 1. La balise `<img>` qui contient le logo de la page (les 2 parts de pizza)
 3. Le lien du menu "Ajouter une pizza"
 4. Le lien vers le site [Unsplash](https://unsplash.com/) dans les crédits
 5. le titre de la première pizza (*`<h4>Regina</h4>`*)
+
+<a href="images/queryselector-console.jpg"><img src="images/queryselector-console.jpg" width="80%"></a>
+
 
 ### A.2.2. querySelectorAll()
 La méthode `querySelectorAll()` permet de récupérer non pas un, mais tous les éléments qui correspondent au sélecteur CSS passé en paramètre.
@@ -60,6 +63,8 @@ La méthode `querySelectorAll()` permet de récupérer non pas un, mais tous les
 Affichez dans la console :
 1. la liste des liens du menu de navigation ("La carte" et "Ajouter une pizza")
 2. la liste des ingrédients de toutes les pizzas de la page
+
+<a href="images/queryselectorall-console.jpg"><img src="images/queryselectorall-console.jpg" width="80%"></a>
 
 ## A.3. Modifier des éléments
 ### A.3.1. innerHTML
@@ -69,8 +74,10 @@ La propriété `innerHTML` permet à la fois de lire et de modifier le contenu d
 2. Remplacez dans la page le titre de la deuxième pizza par *"Savoyarde"*
 3. Ajoutez au titre de la page le code HTML suivant :
 	```html
-	<em>les pizzas c'est la vie</em>
+	<small class="label label-success">les pizzas c'est la vie</small>
 	```
+
+<a href="images/pizzaland-innerhtml.jpg"><img src="images/pizzaland-innerhtml.jpg" width="80%"></a>
 
 ### A.3.2. getAttribute/setAttribute
 Les méthodes `getAttribute()` et `setAttribute()` de la classe Element permettent de lire, d'ajouter ou de modifier des attributs HTML.
@@ -78,5 +85,7 @@ Les méthodes `getAttribute()` et `setAttribute()` de la classe Element permette
 1. Affichez dans la console l'url du 2e lien contenu dans le footer (`"https://www.freepik.com/"`)
 2. Ajoutez la classe CSS "active" au `<li>` qui contient le lien "La carte" dans le menu
 
+<a href="images/pizzaland-setatttribute.jpg"><img src="images/pizzaland-setatttribute.jpg" width="80%"></a>
+
 ## Étape suivante
-Maintenant que l'on est capable de sélectionner / modifier des éléments HTML, nous allons voir dans le prochain exercice comment détecter les événements : [C. Les événements](./C-evenements.md).
+Maintenant que l'on est capable de sélectionner / modifier des éléments HTML, nous allons voir dans le prochain exercice comment détecter les événements : [B. Les événements](./B-evenements.md).

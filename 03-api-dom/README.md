@@ -9,6 +9,6 @@
 ## Sommaire
 Pour plus de clarté, les instructions du TP se trouvent dans des fichiers distincts (un fichier par sujet), procédez dans l'ordre sinon, ça fonctionnera beaucoup moins bien ! :
 
-2. [B. Les bases de l'API DOM](B-les-bases.md)
-3. [C. Les événements](C-evenements.md)
-4. [D. Les formulaires](D-formulaires.md)
+2. [A. Les bases de l'API DOM](A-les-bases.md)
+3. [B. Les événements](B-evenements.md)
+4. [C. Les formulaires](C-formulaires.md)
