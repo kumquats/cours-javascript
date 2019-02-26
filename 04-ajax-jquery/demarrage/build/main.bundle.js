@@ -136,7 +136,7 @@ function (_Page) {
   _createClass(AddPizzaPage, [{
     key: "render",
     value: function render() {
-      return "<form class=\"addPizzaPage\">\n\t\t\t<label>\n\t\t\t\tNom :\n\t\t\t\t<input type=\"text\" name=\"nom\" class=\"form-control\">\n\t\t\t</label>\n\t\t\t<button type=\"submit\" class=\"btn btn-default\">Ajouter</button>\n\t\t</form>";
+      return "<form class=\"addPizzaPage\">\n\t\t<label>\n\t\t\tNom :\n\t\t\t<input type=\"text\" name=\"nom\" class=\"form-control\">\n\t\t</label>\n\t\t<label>\n\t\t\tBase :\n\t\t\t<select name=\"base\" class=\"form-control\">\n\t\t\t\t<option>Tomate</option>\n\t\t\t\t<option>Cr\xE8me</option>\n\t\t\t</select>\n\t\t</label>\n\t\t<label>\n\t\t\tPrix petit format :\n\t\t\t<input type=\"number\" name=\"prix_petite\" class=\"form-control\">\n\t\t</label>\n\t\t<label>\n\t\t\tPrix grand format :\n\t\t\t<input type=\"number\" name=\"prix_grande\" class=\"form-control\">\n\t\t</label>\n\t\t<label>\n\t\t\tIngr\xE9dients :\n\t\t\t<select name=\"ingredients\" multiple=\"true\" class=\"form-control\">\n\t\t\t\t<option value=\"1\">Mozzarella</option>\n\t\t\t\t<option value=\"2\">Jambon</option>\n\t\t\t\t<option value=\"3\">Champignon</option>\n\t\t\t\t<option value=\"4\">Olives</option>\n\t\t\t</select>\n\t\t</label>\n\t\t<button type=\"submit\" class=\"btn btn-default\">Ajouter</button>\n\t</form>";
     }
   }, {
     key: "mount",
