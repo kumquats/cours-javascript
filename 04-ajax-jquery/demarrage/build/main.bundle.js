@@ -127,7 +127,8 @@ function (_Page) {
 
     _classCallCheck(this, AddPizzaPage);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(AddPizzaPage).call(this, 'Ajouter une pizza'));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AddPizzaPage).call(this, 'Ajouter une pizza')); // $FlowFixMe
+
     _this.submit = _this.submit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -154,7 +155,7 @@ function (_Page) {
       event.preventDefault();
       var nomInput = document.querySelector('input[name=nom]');
 
-      if (nomInput) {
+      if (nomInput && nomInput instanceof HTMLInputElement) {
         if (nomInput.value == '') {
           alert('Le champ nom ne peut pas être vide');
         } else {
