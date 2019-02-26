@@ -31,6 +31,8 @@
 
 3. **Une fois tout installé, vous pouvez relancer la compilation à l'aide de la commande `npm run watch`**. Vérifiez ensuite que la page s'affiche correctement dans le navigateur :<br><a href="images/pizzaland-05-modules-webpack.jpg"><img src="images/pizzaland-05.jpg" width="80%"></a>
 
+	Tout au long du TP pensez à vérifier régulièrement que les types que vous utilisez pour les variables, paramètres et valeurs de retour des fonctions/méthodes, sont corrects à l'aide de la commande `./node_modules/.bin/flow`
+
 
 ## A.2. Sélectionner des éléments
 
