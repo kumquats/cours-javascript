@@ -31,9 +31,13 @@ Notez que comme vu en cours :
 
 ## B.2. La gestion du menu
 Dans le fichier `main.js`
-1. **Commencez par commenter le code de l'exercice [B. Les bases de l'API DOM](./B-les-bases.md)** (certains sélecteurs pourront vous être utiles par la suite)
+1. **Commencez par commenter le code de l'exercice [A. Les bases de l'API DOM](./A-les-bases.md)** (certains sélecteurs pourront vous être utiles par la suite)
 2. A l'aide de `querySelector()` et `addEventListener()`, **affichez un message dans la console à chaque fois que l'utilisateur clique sur le lien du menu de navigation "Ajouter une pizza"**
-3. **Effacez le code précédent et remplacez le par un code qui permette d'écouter le clic sur *tous* les liens du menu de navigation** : au clic sur n'importe quel lien de la navigation (actuellement il n'y a dans le menu que les liens "La carte" et "Ajouter une pizza", mais ce code doit fonctionner quelque soit le nombre de liens dans le menu) afficher dans la console le libellé du lien qui a été cliqué grâce à `event.currentTarget` et `element.innerHTML` : par exemple si l'utilisateur clique sur le lien "La carte" on affiche dans le console la chaîne de caractères `"La carte"`
+3. **Effacez le code précédent et remplacez le par un code qui permette d'écouter le clic sur *tous* les liens du menu de navigation** :
+
+	Au clic sur n'importe quel lien de la navigation (actuellement il n'y a dans le menu que les liens "La carte" et "Ajouter une pizza", mais ce code doit fonctionner quelque soit le nombre de liens dans le menu) afficher dans la console le libellé du lien qui a été cliqué grâce à `event.currentTarget` (type `EventTarget`) et `element.innerHTML` : par exemple si l'utilisateur clique sur le lien "La carte" on affiche dans le console la chaîne de caractères `"La carte"`
+
+	***NB :** Pour information, le type de `event.currentTarget` est `EventTarget` et celui de la valeur retournée par la méthode `querySelectorAll()` est `NodeList<HTMLElement>`*
 4. **Ajoutez la classe CSS "active" sur la balise `<li>` qui contient le lien qui a été cliqué** (utilisez pour cela la propriété [element.parentElement](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentElement))
 5. **Juste avant d'ajouter la classe "active" sur le lien cliqué, effacez les classes CSS du `<li>` du menu qui était précédemment actif** de manière à n'avoir qu'un seul lien actif à la fois<br><img src="./images/pizzaland-nav.gif">
 

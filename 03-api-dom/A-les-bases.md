@@ -29,6 +29,9 @@
 
 	*Si vous voulez en savoir plus sur le détail de l'installation et de la configuration des différents outils, vous pouvez consulter les TPs précédents : [modules](../02-poo-modules-typage/C-modules.md#c2-rendre-les-modules-compatibles-avec-les-vieux-navigateurs) et [typage](../02-poo-modules-typage/D-typage.md#d1-installation-et-configuration).*
 
+3. **Une fois tout installé, vous pouvez relancer la compilation à l'aide de la commande `npm run watch`**. Vérifiez ensuite que la page s'affiche correctement dans le navigateur :<br><a href="images/pizzaland-05-modules-webpack.jpg"><img src="images/pizzaland-05.jpg" width="80%"></a>
+
+
 ## A.2. Sélectionner des éléments
 
 ### A.2.1. querySelector()
@@ -38,7 +41,7 @@ querySelector() est une méthode de la classe Element qui permet de retourner un
 ```js
 const appContainerElement:?HTMLElement = document.querySelector('#appContainer');
 ```
-assigne dans la constante `appContainer` la balise d'id html 'appContainer' :
+assigne dans la constante `appContainerElement` la balise d'id html 'appContainer' :
 ```html
 <main id="appContainer">
 ```
@@ -50,9 +53,9 @@ console.log( document.querySelector('#appContainer') );
 
 En inspectant le code html de la page (à l'aide de l'onglet Elements/Inspecteur des devtools) trouvez les sélecteurs qui permettront d'afficher dans la console :
 1. La balise `<img>` qui contient le logo de la page (les 2 parts de pizza)
-3. Le lien du menu "Ajouter une pizza"
-4. Le lien vers le site [Unsplash](https://unsplash.com/) dans les crédits
-5. le titre de la première pizza (*`<h4>Regina</h4>`*)
+2. Le lien du menu "Ajouter une pizza"
+3. Le lien vers le site [Unsplash](https://unsplash.com/) dans les crédits
+4. le titre de la première pizza (*`<h4>Regina</h4>`*)
 
 <a href="images/queryselector-console.jpg"><img src="images/queryselector-console.jpg" width="80%"></a>
 
@@ -62,7 +65,7 @@ La méthode `querySelectorAll()` permet de récupérer non pas un, mais tous les
 
 Affichez dans la console :
 1. la liste des liens du menu de navigation ("La carte" et "Ajouter une pizza")
-2. la liste des ingrédients de toutes les pizzas de la page
+2. la liste des prix de toutes les pizzas de la page
 
 <a href="images/queryselectorall-console.jpg"><img src="images/queryselectorall-console.jpg" width="80%"></a>
 
