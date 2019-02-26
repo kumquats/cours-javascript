@@ -33,7 +33,7 @@ if (logoContainer){
 // A.3.2. getAttribute/setAttribute
 console.log( document.querySelectorAll('footer a')[1].getAttribute('href'));
 const homeLink:?HTMLElement = document.querySelector('.navbar-right li');
-if (homeLink){
+if (homeLink) {
 	homeLink.setAttribute('class', 'active');
 }
 
@@ -46,10 +46,10 @@ function handleNavClick(event:Event){
 		console.log(activeLink.innerHTML);
 		const activeLi:?Element = activeLink.parentElement,
 			prevActiveLi:?Element = document.querySelector('.navbar-right li.active');
-		if ( prevActiveLi ){
+		if (prevActiveLi) {
 			prevActiveLi.setAttribute('class', '');
 		}
-		if ( activeLi ){
+		if (activeLi) {
 			activeLi.setAttribute('class', 'active');
 		}
 	}
@@ -61,7 +61,7 @@ navLinks.forEach( element => element.addEventListener('click', handleNavClick) )
 const addPizzaPage = new AddPizzaPage(),
 	addPizzaLink:?HTMLElement = document.querySelector('.pizzaFormButton');
 
-if (addPizzaLink){
+if (addPizzaLink) {
 	addPizzaLink.addEventListener('click', (event:Event)=>{
 		event.preventDefault();
 		PageRenderer.renderPage( addPizzaPage );
