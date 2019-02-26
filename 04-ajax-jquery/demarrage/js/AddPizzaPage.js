@@ -23,11 +23,11 @@ export default class AddPizzaPage extends Page {
 		</label>
 		<label>
 			Prix petit format :
-			<input type="number" name="prix_petite" class="form-control">
+			<input type="number" name="prix_petite" class="form-control" step="0.05">
 		</label>
 		<label>
 			Prix grand format :
-			<input type="number" name="prix_grande" class="form-control">
+			<input type="number" name="prix_grande" class="form-control" step="0.05">
 		</label>
 		<label>
 			Ingrédients :
@@ -52,14 +52,48 @@ export default class AddPizzaPage extends Page {
 
 	submit(event:Event):void {
 		event.preventDefault();
-		const nomInput:?HTMLElement = document.querySelector('input[name=nom]');
-		if (nomInput && nomInput instanceof HTMLInputElement){
-			if ( nomInput.value == '' ) {
-				alert('Le champ nom ne peut pas être vide');
-			} else {
-				alert(`La Pizza ${nomInput.value} ajoutée !`);
-				nomInput.value = '';
+		// C.4. la validation du formulaire
+		// const nomInput:?HTMLElement = document.querySelector('input[name=nom]');
+		// if (nomInput && nomInput instanceof HTMLInputElement){
+		// 	if ( nomInput.value == '' ) {
+		// 		alert('Le champ nom ne peut pas être vide');
+		// 	} else {
+		// 		alert(`La Pizza ${nomInput.value} ajoutée !`);
+		// 		nomInput.value = '';
+		// 	}
+		// }
+
+		//C.5 le formulaire complet
+		const fieldNames:Array<string> = [
+			'nom',
+			'base',
+			'prix_petite',
+			'prix_grande',
+			'ingredients',
+		];
+		// on vérifie tous les champs à l'aide de la méthode validateField
+		const errors:Array<string> = fieldNames.reduce(this.validateField, []);
+		if (errors.length) {
+			// si des erreurs sont détectées, on les affiche
+			alert( errors.join('\n') );
+		}
+		else {
+			// si il n'y a pas d'erreur, on vide le formulaire
+			const form:?HTMLElement = document.querySelector('form.addPizzaPage');
+			if (form && form instanceof HTMLFormElement) {
+				form.reset();
 			}
 		}
+	}
+	validateField(errors:Array<string>, fieldName:string):Array<string>{
+		const field:?HTMLElement = document.querySelector(`[name=${fieldName}]`);
+		if (
+			( field instanceof HTMLInputElement && field.value == '' )
+			||
+			( field instanceof HTMLSelectElement && field.selectedOptions.length == 0 )
+		) {
+			return errors.concat( `Le champ ${fieldName} ne peut être vide !` );
+		}
+		return errors;
 	}
 }

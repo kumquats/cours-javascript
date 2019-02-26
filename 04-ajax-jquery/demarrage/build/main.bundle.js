@@ -136,7 +136,7 @@ function (_Page) {
   _createClass(AddPizzaPage, [{
     key: "render",
     value: function render() {
-      return "<form class=\"addPizzaPage\">\n\t\t<label>\n\t\t\tNom :\n\t\t\t<input type=\"text\" name=\"nom\" class=\"form-control\">\n\t\t</label>\n\t\t<label>\n\t\t\tBase :\n\t\t\t<select name=\"base\" class=\"form-control\">\n\t\t\t\t<option>Tomate</option>\n\t\t\t\t<option>Cr\xE8me</option>\n\t\t\t</select>\n\t\t</label>\n\t\t<label>\n\t\t\tPrix petit format :\n\t\t\t<input type=\"number\" name=\"prix_petite\" class=\"form-control\">\n\t\t</label>\n\t\t<label>\n\t\t\tPrix grand format :\n\t\t\t<input type=\"number\" name=\"prix_grande\" class=\"form-control\">\n\t\t</label>\n\t\t<label>\n\t\t\tIngr\xE9dients :\n\t\t\t<select name=\"ingredients\" multiple=\"true\" class=\"form-control\">\n\t\t\t\t<option value=\"1\">Mozzarella</option>\n\t\t\t\t<option value=\"2\">Jambon</option>\n\t\t\t\t<option value=\"3\">Champignon</option>\n\t\t\t\t<option value=\"4\">Olives</option>\n\t\t\t</select>\n\t\t</label>\n\t\t<button type=\"submit\" class=\"btn btn-default\">Ajouter</button>\n\t</form>";
+      return "<form class=\"addPizzaPage\">\n\t\t<label>\n\t\t\tNom :\n\t\t\t<input type=\"text\" name=\"nom\" class=\"form-control\">\n\t\t</label>\n\t\t<label>\n\t\t\tBase :\n\t\t\t<select name=\"base\" class=\"form-control\">\n\t\t\t\t<option>Tomate</option>\n\t\t\t\t<option>Cr\xE8me</option>\n\t\t\t</select>\n\t\t</label>\n\t\t<label>\n\t\t\tPrix petit format :\n\t\t\t<input type=\"number\" name=\"prix_petite\" class=\"form-control\" step=\"0.05\">\n\t\t</label>\n\t\t<label>\n\t\t\tPrix grand format :\n\t\t\t<input type=\"number\" name=\"prix_grande\" class=\"form-control\" step=\"0.05\">\n\t\t</label>\n\t\t<label>\n\t\t\tIngr\xE9dients :\n\t\t\t<select name=\"ingredients\" multiple=\"true\" class=\"form-control\">\n\t\t\t\t<option value=\"1\">Mozzarella</option>\n\t\t\t\t<option value=\"2\">Jambon</option>\n\t\t\t\t<option value=\"3\">Champignon</option>\n\t\t\t\t<option value=\"4\">Olives</option>\n\t\t\t</select>\n\t\t</label>\n\t\t<button type=\"submit\" class=\"btn btn-default\">Ajouter</button>\n\t</form>";
     }
   }, {
     key: "mount",
@@ -152,17 +152,44 @@ function (_Page) {
   }, {
     key: "submit",
     value: function submit(event) {
-      event.preventDefault();
-      var nomInput = document.querySelector('input[name=nom]');
+      event.preventDefault(); // C.4. la validation du formulaire
+      // const nomInput:?HTMLElement = document.querySelector('input[name=nom]');
+      // if (nomInput && nomInput instanceof HTMLInputElement){
+      // 	if ( nomInput.value == '' ) {
+      // 		alert('Le champ nom ne peut pas être vide');
+      // 	} else {
+      // 		alert(`La Pizza ${nomInput.value} ajoutée !`);
+      // 		nomInput.value = '';
+      // 	}
+      // }
+      //C.5 le formulaire complet
 
-      if (nomInput && nomInput instanceof HTMLInputElement) {
-        if (nomInput.value == '') {
-          alert('Le champ nom ne peut pas être vide');
-        } else {
-          alert("La Pizza ".concat(nomInput.value, " ajout\xE9e !"));
-          nomInput.value = '';
+      var fieldNames = ['nom', 'base', 'prix_petite', 'prix_grande', 'ingredients']; // on vérifie tous les champs à l'aide de la méthode validateField
+
+      var errors = fieldNames.reduce(this.validateField, []);
+
+      if (errors.length) {
+        // si des erreurs sont détectées, on les affiche
+        alert(errors.join('\n'));
+      } else {
+        // si il n'y a pas d'erreur, on vide le formulaire
+        var form = document.querySelector('form.addPizzaPage');
+
+        if (form && form instanceof HTMLFormElement) {
+          form.reset();
         }
       }
+    }
+  }, {
+    key: "validateField",
+    value: function validateField(errors, fieldName) {
+      var field = document.querySelector("[name=".concat(fieldName, "]"));
+
+      if (field instanceof HTMLInputElement && field.value == '' || field instanceof HTMLSelectElement && field.selectedOptions.length == 0) {
+        return errors.concat("Le champ ".concat(fieldName, " ne peut \xEAtre vide !"));
+      }
+
+      return errors;
     }
   }]);
 
