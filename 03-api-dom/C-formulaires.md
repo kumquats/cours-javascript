@@ -44,9 +44,9 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 		return `<form class="addPizzaPage">
 			<label>
 				Nom :
-				<input type="text" name="nom" >
+				<input type="text" name="nom" class="form-control">
 			</label>
-			<button type="submit">Ajouter</button>
+			<button type="submit" class="btn btn-default">Ajouter</button>
 		</form>`;
 	}
 	```
@@ -88,35 +88,35 @@ Pour permettre à chaque page de réagir aux événements de l'utilisateur, on v
 ## C.5. Le formulaire complet :
 Coder le formulaire complet de création de pizza selon le code HTML suivant (tous les champs sont obligatoires) :
 ```html
-<form class="add-pizza-page">
+<form class="addPizzaPage">
 	<label>
 		Nom :
-		<input type="text" name="nom" >
+		<input type="text" name="nom" class="form-control">
 	</label>
 	<label>
 		Base :
-		<select name="base" >
+		<select name="base" class="form-control">
 			<option>Tomate</option>
 			<option>Crème</option>
 		</select>
 	</label>
 	<label>
 		Prix petit format :
-		<input type="number" name="prix_petite" >
+		<input type="number" name="prix_petite" class="form-control">
 	</label>
 	<label>
 		Prix grand format :
-		<input type="number" name="prix_grande" >
+		<input type="number" name="prix_grande" class="form-control">
 	</label>
 	<label>
 		Ingrédients :
-		<select name="ingredients">
+		<select name="ingredients" multiple="true" class="form-control">
 			<option value="1">Mozzarella</option>
 			<option value="2">Jambon</option>
 			<option value="3">Champignon</option>
 			<option value="4">Olives</option>
 		</select>
 	</label>
-	<button type="submit">Ajouter</button>
+	<button type="submit" class="btn btn-default">Ajouter</button>
 </form>
 ```
