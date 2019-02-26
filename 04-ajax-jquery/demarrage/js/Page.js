@@ -11,4 +11,7 @@ export default class Page extends Component {
 	renderTitle():string {
 		return `<h1>${this.#title}</h1>`;
 	}
+	mount():void {
+		//
+	}
 }
