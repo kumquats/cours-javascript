@@ -127,3 +127,19 @@ footer {
 footer a{
 	color: #0006;
 }
+form {
+	display:flex;
+	padding: 20px;
+	flex-direction: column;
+}
+form label {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: baseline;
+}
+form label input,
+form label select,
+form label .form-control {
+	width: 70%;
+}

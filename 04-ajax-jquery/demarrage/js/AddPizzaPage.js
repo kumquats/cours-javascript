@@ -12,9 +12,9 @@ export default class AddPizzaPage extends Page {
 		return `<form class="addPizzaPage">
 			<label>
 				Nom :
-				<input type="text" name="nom" >
+				<input type="text" name="nom" class="form-control">
 			</label>
-			<button type="submit">Ajouter</button>
+			<button type="submit" class="btn btn-default">Ajouter</button>
 		</form>`;
 	}
 

@@ -136,7 +136,7 @@ function (_Page) {
   _createClass(AddPizzaPage, [{
     key: "render",
     value: function render() {
-      return "<form class=\"addPizzaPage\">\n\t\t\t<label>\n\t\t\t\tNom :\n\t\t\t\t<input type=\"text\" name=\"nom\" >\n\t\t\t</label>\n\t\t\t<button type=\"submit\">Ajouter</button>\n\t\t</form>";
+      return "<form class=\"addPizzaPage\">\n\t\t\t<label>\n\t\t\t\tNom :\n\t\t\t\t<input type=\"text\" name=\"nom\" class=\"form-control\">\n\t\t\t</label>\n\t\t\t<button type=\"submit\" class=\"btn btn-default\">Ajouter</button>\n\t\t</form>";
     }
   }, {
     key: "mount",
