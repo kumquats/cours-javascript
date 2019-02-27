@@ -87,7 +87,7 @@ On peut cependant assez facilement rendre tout ça compatible :
 			["@babel/env", {"modules": false}],
 			"@babel/flow"
 		],
-		"plugins": ["@babel/plugin-proposal-class-properties"],
+		"plugins": ["@babel/plugin-proposal-class-properties"]
 	}
 	```
 3. **Relancez la compilation à l'aide de la commande `npm run build` ou `npm run watch`** (*pensez à stopper le `watch`précédent s'il tournait toujours <kbd>CTRL</kbd>+<kbd>C</kbd>)*, vérifiez que tout compile correctement et que l'affichage dans le navigateur est inchangé.
