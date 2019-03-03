@@ -25,15 +25,15 @@ if (homeLink) {
 function handleNavClick(event:Event){
 	event.preventDefault();
 
-	const activeLink:EventTarget = event.currentTarget;
-	if (activeLink instanceof HTMLElement){
-		const activeLi:?Element = activeLink.parentElement,
+	const link:EventTarget = event.currentTarget;
+	if (link instanceof HTMLElement){
+		const li:?Element = link.parentElement,
 			prevActiveLi:?Element = document.querySelector('.navbar-right li.active');
 		if (prevActiveLi) {
 			prevActiveLi.setAttribute('class', '');
 		}
-		if (activeLi) {
-			activeLi.setAttribute('class', 'active');
+		if (li) {
+			li.setAttribute('class', 'active');
 		}
 	}
 }
@@ -41,13 +41,15 @@ const navLinks:NodeList<HTMLElement> = document.querySelectorAll('.navbar-right 
 navLinks.forEach( element => element.addEventListener('click', handleNavClick) );
 
 // Gestion du clic sur le lien du menu "Ajouter une pizza"
-const addPizzaPage = new AddPizzaPage(),
-	addPizzaLink:?HTMLElement = document.querySelector('.pizzaFormButton');
-
+const addPizzaPage:AddPizzaPage = new AddPizzaPage();
+function renderAddPizza():void{
+	PageRenderer.renderPage( addPizzaPage );
+}
+const addPizzaLink:?HTMLElement = document.querySelector('.pizzaFormButton');
 if (addPizzaLink) {
 	addPizzaLink.addEventListener('click', (event:Event)=>{
 		event.preventDefault();
-		PageRenderer.renderPage( addPizzaPage );
+		renderAddPizza();
 	})
 }
 

@@ -172,7 +172,7 @@ form label .form-control {
 	animation: slideBg .1s linear infinite;
 }
 .jumbotron .spicy:hover .spicy-icon{
-	animation: wind .01s linear infinite;
+	animation: burn .01s linear infinite;
 }
 .jumbotron h1, .jumbotron p {
 	animation: fadeIn .6s ease, slide .4s cubic-bezier(.190, 1.000, .220, 1.000);
@@ -192,7 +192,7 @@ form label .form-control {
 		background-position: -200% center;
 	}
 }
-@keyframes wind {
+@keyframes burn {
 	100% {
 		transform: skew(-13deg);
 	}

@@ -155,7 +155,7 @@ function (_Page) {
       var _this2 = this;
 
       event.preventDefault();
-      var fieldNames = ['nom', 'base', 'prix_petite', 'prix_grande', 'ingredients']; // on vérifie tous les champs à l'aide de la méthode validateField
+      var fieldNames = ['nom', 'base', 'prix_petite', 'prix_grande', 'ingredients']; // on récupère la valeur saisie dans chaque champ
 
       var values = {};
       var errors = [];
@@ -209,17 +209,21 @@ function (_Page) {
   }, {
     key: "getFieldValue",
     value: function getFieldValue(fieldName) {
+      // on récupère une référence vers le champ qui a comme attribut `name` la valeur fieldName (nom, base, prix_petite, etc.)
       var field = document.querySelector("[name=".concat(fieldName, "]"));
 
       if (field instanceof HTMLInputElement) {
+        // s'il s'agit d'un <input> on utilise la propriété `value`
+        // et on retourne la chaine de caractère saisie
         return field.value != '' ? field.value : null;
       } else if (field instanceof HTMLSelectElement) {
+        // s'il s'agit d'un <select> on utilise la propriété `selectedOptions`
         var values = [];
 
         for (var i = 0; i < field.selectedOptions.length; i++) {
-          var option = field.selectedOptions[i];
-          values.push(option.value);
-        }
+          values.push(field.selectedOptions[i].value);
+        } // et on retourne un tableau avec les valeurs sélectionnées
+
 
         return values.length ? values : null;
       }
@@ -673,18 +677,18 @@ if (homeLink) {
 
 function handleNavClick(event) {
   event.preventDefault();
-  var activeLink = event.currentTarget;
+  var link = event.currentTarget;
 
-  if (activeLink instanceof HTMLElement) {
-    var activeLi = activeLink.parentElement,
+  if (link instanceof HTMLElement) {
+    var li = link.parentElement,
         prevActiveLi = document.querySelector('.navbar-right li.active');
 
     if (prevActiveLi) {
       prevActiveLi.setAttribute('class', '');
     }
 
-    if (activeLi) {
-      activeLi.setAttribute('class', 'active');
+    if (li) {
+      li.setAttribute('class', 'active');
     }
   }
 }
@@ -694,13 +698,18 @@ navLinks.forEach(function (element) {
   return element.addEventListener('click', handleNavClick);
 }); // Gestion du clic sur le lien du menu "Ajouter une pizza"
 
-var addPizzaPage = new _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_2__["default"](),
-    addPizzaLink = document.querySelector('.pizzaFormButton');
+var addPizzaPage = new _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
+
+function renderAddPizza() {
+  _PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__["default"].renderPage(addPizzaPage);
+}
+
+var addPizzaLink = document.querySelector('.pizzaFormButton');
 
 if (addPizzaLink) {
   addPizzaLink.addEventListener('click', function (event) {
     event.preventDefault();
-    _PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__["default"].renderPage(addPizzaPage);
+    renderAddPizza();
   });
 } // A.3. Charger un fichier statique
 
