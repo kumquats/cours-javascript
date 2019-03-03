@@ -52,18 +52,6 @@ export default class AddPizzaPage extends Page {
 
 	submit(event:Event):void {
 		event.preventDefault();
-		// C.4. la validation du formulaire
-		// const nomInput:?HTMLElement = document.querySelector('input[name=nom]');
-		// if (nomInput && nomInput instanceof HTMLInputElement){
-		// 	if ( nomInput.value == '' ) {
-		// 		alert('Le champ nom ne peut pas être vide');
-		// 	} else {
-		// 		alert(`La Pizza ${nomInput.value} ajoutée !`);
-		// 		nomInput.value = '';
-		// 	}
-		// }
-
-		//C.5 le formulaire complet
 		const fieldNames:Array<string> = [
 			'nom',
 			'base',
@@ -72,28 +60,64 @@ export default class AddPizzaPage extends Page {
 			'ingredients',
 		];
 		// on vérifie tous les champs à l'aide de la méthode validateField
-		const errors:Array<string> = fieldNames.reduce(this.validateField, []);
+		const values:any = {};
+		const errors:Array<string> = [];
+
+		fieldNames.forEach( (fieldName:string) => {
+			const value = this.getFieldValue(fieldName);
+			if ( !value ){
+				errors.push( `Le champ ${fieldName} ne peut être vide !` );
+			}
+			values[fieldName] = value;
+		});
+
 		if (errors.length) {
 			// si des erreurs sont détectées, on les affiche
 			alert( errors.join('\n') );
-		}
-		else {
-			// si il n'y a pas d'erreur, on vide le formulaire
-			const form:?HTMLElement = document.querySelector('form.addPizzaPage');
-			if (form && form instanceof HTMLFormElement) {
-				form.reset();
-			}
+		} else {
+			// si il n'y a pas d'erreur on envoie les données
+			const pizza = {
+				nom: values.nom,
+				base: values.base[0],
+				prix_petite: Number(values.prix_petite),
+				prix_grande: Number(values.prix_grande),
+				ingredients: values.ingredients
+			};
+			fetch( 'http://localhost:8080/api/v1/pizzas', {
+					method:'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(pizza)
+				})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error( `${response.status} : ${response.statusText}` );
+				}
+				return response.json();
+			})
+			.then ( newPizza => {
+				alert(`Pizza "${newPizza.nom}" enregistrée avec succès ! (id ${newPizza.id})`);
+				// puis on vide le formulaire
+				const form:?HTMLElement = document.querySelector('form.addPizzaPage');
+				if (form && form instanceof HTMLFormElement) {
+					form.reset();
+				}
+			})
+			.catch( error => alert(`Enregistrement impossible : ${error.message}`) );
 		}
 	}
-	validateField(errors:Array<string>, fieldName:string):Array<string>{
+
+	getFieldValue(fieldName:string):?string|Array<string>{
 		const field:?HTMLElement = document.querySelector(`[name=${fieldName}]`);
-		if (
-			( field instanceof HTMLInputElement && field.value == '' )
-			||
-			( field instanceof HTMLSelectElement && field.selectedOptions.length == 0 )
-		) {
-			return errors.concat( `Le champ ${fieldName} ne peut être vide !` );
+		if ( field instanceof HTMLInputElement ) {
+			return field.value != '' ? field.value : null;
+		} else if ( field instanceof HTMLSelectElement ) {
+			const values:Array<string> = [];
+			for (let i = 0; i < field.selectedOptions.length; i++) {
+				const option:HTMLOptionElement = field.selectedOptions[i];
+				values.push(option.value);
+			}
+			return values.length ? values : null;
 		}
-		return errors;
+		return null;
 	}
 }

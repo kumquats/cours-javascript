@@ -144,3 +144,69 @@ form label select,
 form label .form-control {
 	width: 70%;
 }
+
+.jumbotron {
+	padding: 20px 60px;
+	background-color: #e2e8e9;
+	background-image: url('../images/bg.png');
+	background-size: cover;
+	background-position: center;
+	animation: fadeIn .8s ease, slide 1.2s cubic-bezier(.190, 1.000, .220, 1.000);
+	animation-delay: .1s;
+	animation-fill-mode: both;
+	overflow: hidden;
+}
+.jumbotron .spicy{
+	font-size:130%;
+	background: linear-gradient(-55deg, #cd1a1e 0%,#faa119 40%, #fecf0a 50%, #faa119 60%, #cd1a1e 100%);
+	background-size: 200% 200%;
+	white-space: nowrap;
+	color: #cd1a1e;
+	background-clip: text;
+	text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+}
+.jumbotron .spicy:hover {
+	animation: slideBg .1s linear infinite;
+}
+.jumbotron .spicy:hover .spicy-icon{
+	animation: wind .01s linear infinite;
+}
+.jumbotron h1, .jumbotron p {
+	animation: fadeIn .6s ease, slide .4s cubic-bezier(.190, 1.000, .220, 1.000);
+	animation-delay: .4s;
+	animation-fill-mode: both;
+}
+.jumbotron p {
+	animation-delay: .5s;
+}
+.jumbotron .spicy-icon {
+	height:50px;
+	vertical-align: baseline;
+	transform-origin: bottom left;
+}
+@keyframes slideBg {
+	100% {
+		background-position: -200% center;
+	}
+}
+@keyframes wind {
+	100% {
+		transform: skew(-13deg);
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes slide {
+	0% {
+		transform: translateX(-300px);
+	}
+}

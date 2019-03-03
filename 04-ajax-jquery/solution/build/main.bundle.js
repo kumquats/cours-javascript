@@ -152,44 +152,79 @@ function (_Page) {
   }, {
     key: "submit",
     value: function submit(event) {
-      event.preventDefault(); // C.4. la validation du formulaire
-      // const nomInput:?HTMLElement = document.querySelector('input[name=nom]');
-      // if (nomInput && nomInput instanceof HTMLInputElement){
-      // 	if ( nomInput.value == '' ) {
-      // 		alert('Le champ nom ne peut pas être vide');
-      // 	} else {
-      // 		alert(`La Pizza ${nomInput.value} ajoutée !`);
-      // 		nomInput.value = '';
-      // 	}
-      // }
-      //C.5 le formulaire complet
+      var _this2 = this;
 
+      event.preventDefault();
       var fieldNames = ['nom', 'base', 'prix_petite', 'prix_grande', 'ingredients']; // on vérifie tous les champs à l'aide de la méthode validateField
 
-      var errors = fieldNames.reduce(this.validateField, []);
+      var values = {};
+      var errors = [];
+      fieldNames.forEach(function (fieldName) {
+        var value = _this2.getFieldValue(fieldName);
+
+        if (!value) {
+          errors.push("Le champ ".concat(fieldName, " ne peut \xEAtre vide !"));
+        }
+
+        values[fieldName] = value;
+      });
 
       if (errors.length) {
         // si des erreurs sont détectées, on les affiche
         alert(errors.join('\n'));
       } else {
-        // si il n'y a pas d'erreur, on vide le formulaire
-        var form = document.querySelector('form.addPizzaPage');
+        // si il n'y a pas d'erreur on envoie les données
+        var pizza = {
+          nom: values.nom,
+          base: values.base[0],
+          prix_petite: Number(values.prix_petite),
+          prix_grande: Number(values.prix_grande),
+          ingredients: values.ingredients
+        };
+        fetch('http://localhost:8080/api/v1/pizzas', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(pizza)
+        }).then(function (response) {
+          if (!response.ok) {
+            throw new Error("".concat(response.status, " : ").concat(response.statusText));
+          }
 
-        if (form && form instanceof HTMLFormElement) {
-          form.reset();
-        }
+          return response.json();
+        }).then(function (newPizza) {
+          alert("Pizza \"".concat(newPizza.nom, "\" enregistr\xE9e avec succ\xE8s ! (id ").concat(newPizza.id, ")")); // puis on vide le formulaire
+
+          var form = document.querySelector('form.addPizzaPage');
+
+          if (form && form instanceof HTMLFormElement) {
+            form.reset();
+          }
+        }).catch(function (error) {
+          return alert("Enregistrement impossible : ".concat(error.message));
+        });
       }
     }
   }, {
-    key: "validateField",
-    value: function validateField(errors, fieldName) {
+    key: "getFieldValue",
+    value: function getFieldValue(fieldName) {
       var field = document.querySelector("[name=".concat(fieldName, "]"));
 
-      if (field instanceof HTMLInputElement && field.value == '' || field instanceof HTMLSelectElement && field.selectedOptions.length == 0) {
-        return errors.concat("Le champ ".concat(fieldName, " ne peut \xEAtre vide !"));
+      if (field instanceof HTMLInputElement) {
+        return field.value != '' ? field.value : null;
+      } else if (field instanceof HTMLSelectElement) {
+        var values = [];
+
+        for (var i = 0; i < field.selectedOptions.length; i++) {
+          var option = field.selectedOptions[i];
+          values.push(option.value);
+        }
+
+        return values.length ? values : null;
       }
 
-      return errors;
+      return null;
     }
   }]);
 
@@ -601,35 +636,6 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./js/data.js":
-/*!********************!*\
-  !*** ./js/data.js ***!
-  \********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var data = [{
-  nom: 'Regina',
-  base: 'tomate',
-  prix_petite: 5.5,
-  prix_grande: 7.5
-}, {
-  nom: 'Napolitaine',
-  base: 'tomate',
-  prix_petite: 6.2,
-  prix_grande: 8
-}, {
-  nom: 'Spicy',
-  base: 'crème',
-  prix_petite: 6.5,
-  prix_grande: 9.95
-}];
-/* harmony default export */ __webpack_exports__["default"] = (data);
-
-/***/ }),
-
 /***/ "./js/main.js":
 /*!********************!*\
   !*** ./js/main.js ***!
@@ -640,45 +646,29 @@ var data = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HomePage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomePage.js */ "./js/HomePage.js");
-/* harmony import */ var _data_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data.js */ "./js/data.js");
-/* harmony import */ var _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PageRenderer.js */ "./js/PageRenderer.js");
-/* harmony import */ var _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AddPizzaPage.js */ "./js/AddPizzaPage.js");
+/* harmony import */ var _PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PageRenderer.js */ "./js/PageRenderer.js");
+/* harmony import */ var _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddPizzaPage.js */ "./js/AddPizzaPage.js");
 
 
 
-
-_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].titleElement = document.querySelector('.pageTitle');
-_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].contentElement = document.querySelector('.pizzasContainer');
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__["default"].titleElement = document.querySelector('.pageTitle');
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__["default"].contentElement = document.querySelector('.pizzasContainer');
 var homePage = new _HomePage_js__WEBPACK_IMPORTED_MODULE_0__["default"]([]);
-_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(homePage); // page vide
+_PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__["default"].renderPage(homePage); // page vide
+// ajout de la baseline "les pizzas c'est la vie" au logo
 
-homePage.data = _data_js__WEBPACK_IMPORTED_MODULE_1__["default"];
-_PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(homePage); // liste des vidéos
-// A.2.1. querySelector
-// console.log( document.querySelector('.navbar-brand img') );
-// console.log( document.querySelector('.pizzaFormButton') );
-// console.log( document.querySelector('footer a') );
-// console.log( document.querySelector('.pizzasContainer article h4') );
-//A.2.2. querySelectorAll
-// console.log( document.querySelectorAll('.navbar-right li a') );
-// console.log( document.querySelectorAll('.pizzasContainer article .infos li') );
-//A.3.1. innerHTML
-
-console.log(document.querySelectorAll('.pizzasContainer article h4')[1].innerHTML);
-document.querySelectorAll('.pizzasContainer article h4')[1].innerHTML = 'Savoyarde';
 var logoContainer = document.querySelector('.navbar-brand');
 
 if (logoContainer) {
   logoContainer.innerHTML += '<small class="label label-success">les pizzas c\'est la vie</small>';
-} // A.3.2. getAttribute/setAttribute
+} // Activation du lien "La carte" dans le menu
 
 
-console.log(document.querySelectorAll('footer a')[1].getAttribute('href'));
 var homeLink = document.querySelector('.navbar-right li');
 
 if (homeLink) {
   homeLink.setAttribute('class', 'active');
-} //B.2. La gestion du menu
+} // Gestion du click sur les liens du menu
 
 
 function handleNavClick(event) {
@@ -686,7 +676,6 @@ function handleNavClick(event) {
   var activeLink = event.currentTarget;
 
   if (activeLink instanceof HTMLElement) {
-    console.log(activeLink.innerHTML);
     var activeLi = activeLink.parentElement,
         prevActiveLi = document.querySelector('.navbar-right li.active');
 
@@ -703,17 +692,39 @@ function handleNavClick(event) {
 var navLinks = document.querySelectorAll('.navbar-right a');
 navLinks.forEach(function (element) {
   return element.addEventListener('click', handleNavClick);
-}); //C.3. le formulaire d'ajout de pizza
+}); // Gestion du clic sur le lien du menu "Ajouter une pizza"
 
-var addPizzaPage = new _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_3__["default"](),
+var addPizzaPage = new _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_2__["default"](),
     addPizzaLink = document.querySelector('.pizzaFormButton');
 
 if (addPizzaLink) {
   addPizzaLink.addEventListener('click', function (event) {
     event.preventDefault();
-    _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(addPizzaPage);
+    _PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__["default"].renderPage(addPizzaPage);
   });
+} // A.3. Charger un fichier statique
+
+
+function displayNews(html) {
+  var newsContainer = document.querySelector('.newsContainer');
+
+  if (newsContainer) {
+    newsContainer.innerHTML = html;
+  }
 }
+
+fetch('./news.html').then(function (response) {
+  return response.text();
+}).then(displayNews);
+
+function renderHome(data) {
+  homePage.data = data;
+  _PageRenderer_js__WEBPACK_IMPORTED_MODULE_1__["default"].renderPage(homePage);
+}
+
+fetch('http://localhost:8080/api/v1/pizzas').then(function (response) {
+  return response.json();
+}).then(renderHome);
 
 /***/ })
 
