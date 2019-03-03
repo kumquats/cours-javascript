@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="115.333px" height="136.334px" viewBox="0 0 115.333 136.334" enable-background="new 0 0 115.333 136.334"
+	 xml:space="preserve">
+<g id="Calque_1">
+	<g>
+		<g>
+			<g>
+				
+					<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-120.4673" y1="76.7539" x2="-120.2131" y2="-97.4448" gradientTransform="matrix(-0.7645 -0.6446 -0.6446 0.7645 -39.8141 8.3878)">
+					<stop  offset="0.1515" style="stop-color:#EE2A24"/>
+					<stop  offset="0.2463" style="stop-color:#EE3624"/>
+					<stop  offset="0.3931" style="stop-color:#F04E23"/>
+					<stop  offset="0.5734" style="stop-color:#F36D21"/>
+					<stop  offset="0.7803" style="stop-color:#F7901E"/>
+					<stop  offset="1" style="stop-color:#FEBC11"/>
+				</linearGradient>
+				<path fill="url(#SVGID_1_)" d="M2.831,84.858C4.342,67.731,14.158,55.142,24,49c21.133-13.189,40-9,62.571-22.013
+					c7.435-4.286,17.434-15.991,17.493-24.553c3.27,7.57,6.637,17.843,7.494,25.345c1.748,15.303-7.402,41.189-24.854,63.281
+					c7.341,0.693,13.481-4.11,17.125-9.022c0.707,8.582-2.574,17.8-6.907,24.122c-15.751,21.64-50.245,40.313-78.135,18.924
+					C-0.473,108.846,2.831,84.858,2.831,84.858z"/>
+			</g>
+		</g>
+		<g>
+			
+				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-102.1831" y1="-9.9224" x2="-165.6147" y2="55.8514" gradientTransform="matrix(-0.7645 -0.6446 -0.6446 0.7645 -39.8141 8.3878)">
+				<stop  offset="0.0182" style="stop-color:#FECF0A"/>
+				<stop  offset="0.3939" style="stop-color:#FDB515"/>
+				<stop  offset="0.5036" style="stop-color:#F9A01B"/>
+				<stop  offset="0.8447" style="stop-color:#F26122"/>
+				<stop  offset="1" style="stop-color:#EF4023"/>
+			</linearGradient>
+			<path fill="url(#SVGID_2_)" d="M14.9,117.302c-6.221-7.863-8.247-18.927-5.319-27.762c5.003-16.125,20.216-23.054,35.638-26.329
+				c8.197-1.678,18.29-2.292,26.139-5.168c3.814-1.305,7.715-3.257,10.948-6.349c-0.187,9.336-1.18,20.169-2.869,29.145
+				c-3.058,15.958-8.719,30.178-22.097,40.147c-12.225,9.135-25.57,7.922-37.489,0.492L14.9,117.302z"/>
+		</g>
+	</g>
+</g>
+<g id="Calque_2">
+	<circle stroke="#000000" stroke-width="3" stroke-miterlimit="10" cx="26.667" cy="89.667" r="3"/>
+	<circle stroke="#000000" stroke-width="3" stroke-miterlimit="10" cx="58.667" cy="89.667" r="3"/>
+	<path fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-miterlimit="10" d="M50.167,99.25
+		c0,4.28-3.47,7.75-7.75,7.75s-7.75-3.47-7.75-7.75"/>
+</g>
+</svg>
