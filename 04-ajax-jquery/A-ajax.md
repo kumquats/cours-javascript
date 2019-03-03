@@ -1,12 +1,12 @@
-[](#### TP4 - AJAX - jQuery <!-- omit in toc -->
+#### TP4 - AJAX - jQuery <!-- omit in toc -->
 # A. AJAX <!-- omit in toc -->
 
 ## Sommaire <!-- omit in toc -->
 - [A.1. Installation](#a1-installation)
 - [A.2. XMLHttpRequest vs fetch](#a2-xmlhttprequest-vs-fetch)
 - [A.3. Charger un fichier statique](#a3-charger-un-fichier-statique)
-- [A.4. Appeler une API REST/JSON](#a4-appeler-une-api-restjson)
-- [A.5. Envoyer des données à un service distant](#a5-envoyer-des-données-à-un-service-distant)
+- [A.4. Appeler une API REST/JSON en GET](#a4-appeler-une-api-restjson-en-get)
+- [A.5. Envoyer des données en POST](#a5-envoyer-des-données-en-post)
 - [Étape suivante](#Étape-suivante)
 
 ***Ce TP va permettre de connecter notre appli JS à une base de données distante par l'intermédiaire d'une API REST/JSON mettre en oeuvre les principales méthodes de sélection et de modification d'éléments de l'arbre DOM.***
@@ -126,7 +126,7 @@ Comme on peut le voir, **aucune version d'Internet Explorer n'est compatible ave
 	    .then( displayNews );
 	```
 
-## A.4. Appeler une API REST/JSON
+## A.4. Appeler une API REST/JSON en GET
 **Maintenant que l'on est capables de récupérer une ressource externe en JS et d'en afficher le contenu, connectons notre application au serveur REST développé en cours de programmation répartie !!!**
 
 1. Téléchargez le serveur REST/JSON sur https://framadrop.org/r/NY7OobPbK8#7HnGpWvgqR9c7Pn1vQKau4O2SwXTmhxTRyH2Cq0r7ok=
@@ -163,19 +163,47 @@ Comme on peut le voir, **aucune version d'Internet Explorer n'est compatible ave
 	CAPTURE RESULTAT FINAL
 	```
 
-## A.5. Envoyer des données à un service distant
+## A.5. Envoyer des données en POST
 **Maintenant que l'on arrive à charger des données depuis l'API REST tentons à l'inverse d'envoyer des données au serveur !**
 
-1. Dans la méthode `submit` (méthode déclenchée à la soumission du formulaire) de la classe `AddPizzaPage`, appelez le webservice `POST` sur `/api/v1/pizzas` afin d'ajouter une nouvelle pizza avec les informations saisies par l'utilisateur (uniquement si aucune erreur de saisie n'est détectée !).
+Dans la méthode `submit` (méthode déclenchée à la soumission du formulaire) de la classe `AddPizzaPage`, appelez le webservice `POST` sur `/api/v1/pizzas` afin d'ajouter une nouvelle pizza avec les informations saisies par l'utilisateur (uniquement si aucune erreur de saisie n'est détectée !).
 
-attention format de l'objet à envoyer à l'api (tableau d'id) (donner exemple d'objet JSON)
-rappel JSON.stringify
-recharger la page pour réafficher la home page : la pizza s'affiche en bas
+La technique à utiliser pour passer les données à envoyer au serveur à fetch dépendent de la façon dont est codé le weberservice. Ici, le webservice s'attend à recevoir une requête dont le `"Content-Type"` est `"application/json"`. Il faut donc envoyer à fetch une chaîne de caractères encodée en en JSON grâce à [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) :
+
+```js
+fetch(
+	'http://localhost:8080/api/v1/pizzas',
+	{
+		method:'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(pizza)
+	}
+);
+```
+
+Le webservice `POST` `/api/v1/pizzas` s'attend à recevoir en paramètre une chaîne JSON de la forme suivante :
+```json
+{
+	"nom":"Savoyarde",
+	"base":"crème",
+	"prix_petite": 8,
+	"prix_grande": 10.5,
+	"ingredients": [7, 8, 9, 12]
+}
+```
+On notera que les prix sont exprimés en nombre et pas en chaînes de caractères et que les ingrédients sont un tableau contenant les ids des ingrédients à associer à la pizza.
+
+Si l'envoi s'est bien passé, le webservice retourne en entête un status `201 Created` et dans le corps de la réponse le JSON correspondant à la pizza créée :
+
+```
+CAPTURE réponse http 201
+```
+
+Si tout s'est bien passé, vous pouvez recharger la page et constater que la pizza que vous avez saisie dans le formulaire s'est ajoutée en bas de la liste sur la HomePage :
+
+```
+CAPTURE PIZZA
+```
 
 ## Étape suivante
 Maintenant que l'on est capable de faire communiquer notre appli JS avec un serveur distant, nous allons voir dans le prochain exercice comment simplifier notre code à l'aide de jQuery : [B. jQuery](./B-jquery.md).)
-
-pour aller plus loin
-redirection vers liste après chargement
-GET ingredients > liste du formulaire > render
-ajout de loader
