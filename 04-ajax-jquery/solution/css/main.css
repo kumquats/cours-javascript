@@ -210,3 +210,42 @@ form label .form-control {
 		transform: translateX(-300px);
 	}
 }
+.is-loading {
+	position:relative;
+	min-height: 200px;
+}
+.is-loading * {
+	display: none;
+}
+.is-loading:before {
+	content: '';
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(0,0,0,.1);
+	z-index: 1;
+}
+.is-loading:after {
+	content: '	';
+	position: absolute;
+	top:50%;
+	left:50%;
+	width: 50px;
+	height: 50px;
+	border: 1px black solid;
+	border-top-color: rgba(0,0,0,.3);
+	z-index: 2;
+	border-radius: 50%;
+	animation: rotate .5s linear infinite;
+	transform-origin: center;
+}
+@keyframes rotate {
+	0% {
+		transform: translate(-50%,-50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%,-50%) rotate(360deg);
+	}
+}
