@@ -43,7 +43,7 @@ export default class AddPizzaPage extends Page {
 	}
 
 	mount():void {
-		const form = document.querySelector('form.addPizzaPage');
+		const form:?HTMLElement = document.querySelector('form.addPizzaPage');
 		if (!form) {
 			return;
 		}
@@ -58,7 +58,7 @@ export default class AddPizzaPage extends Page {
 		// 	if ( nomInput.value == '' ) {
 		// 		alert('Le champ nom ne peut pas être vide');
 		// 	} else {
-		// 		alert(`La Pizza ${nomInput.value} ajoutée !`);
+		// 		alert(`Pizza "${nomInput.value}" enregistrée avec succès !`);
 		// 		nomInput.value = '';
 		// 	}
 		// }
@@ -71,29 +71,49 @@ export default class AddPizzaPage extends Page {
 			'prix_grande',
 			'ingredients',
 		];
-		// on vérifie tous les champs à l'aide de la méthode validateField
-		const errors:Array<string> = fieldNames.reduce(this.validateField, []);
+		// on vérifie la valeur saisie dans chaque champ
+		const values:any = {};
+		const errors:Array<string> = [];
+
+		fieldNames.forEach( (fieldName:string) => {
+			const value = this.getFieldValue(fieldName);
+			if ( !value ){
+				errors.push( `Le champ ${fieldName} ne peut être vide !` );
+			}
+			values[fieldName] = value;
+		});
+
 		if (errors.length) {
 			// si des erreurs sont détectées, on les affiche
 			alert( errors.join('\n') );
 		}
 		else {
-			// si il n'y a pas d'erreur, on vide le formulaire
+			// si il n'y a pas d'erreur, on affiche un message de succès
+			alert(`Pizza "${values.nom}" enregistrée avec succès !`);
+			// puis on vide le formulaire
 			const form:?HTMLElement = document.querySelector('form.addPizzaPage');
 			if (form && form instanceof HTMLFormElement) {
 				form.reset();
 			}
 		}
 	}
-	validateField(errors:Array<string>, fieldName:string):Array<string>{
+
+	getFieldValue(fieldName:string):?string|Array<string>{
+		// on récupère une référence vers le champ qui a comme attribut `name` la valeur fieldName (nom, base, prix_petite, etc.)
 		const field:?HTMLElement = document.querySelector(`[name=${fieldName}]`);
-		if (
-			( field instanceof HTMLInputElement && field.value == '' )
-			||
-			( field instanceof HTMLSelectElement && field.selectedOptions.length == 0 )
-		) {
-			return errors.concat( `Le champ ${fieldName} ne peut être vide !` );
+		if ( field instanceof HTMLInputElement ) {
+			// s'il s'agit d'un <input> on utilise la propriété `value`
+			// et on retourne la chaine de caractère saisie
+			return field.value != '' ? field.value : null;
+		} else if ( field instanceof HTMLSelectElement ) {
+			// s'il s'agit d'un <select> on utilise la propriété `selectedOptions`
+			const values:Array<string> = [];
+			for (let i = 0; i < field.selectedOptions.length; i++) {
+				values.push( field.selectedOptions[i].value );
+			}
+			// et on retourne un tableau avec les valeurs sélectionnées
+			return values.length ? values : null;
 		}
-		return errors;
+		return null;
 	}
 }

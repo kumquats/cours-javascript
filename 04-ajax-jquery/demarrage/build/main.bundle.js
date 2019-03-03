@@ -152,27 +152,41 @@ function (_Page) {
   }, {
     key: "submit",
     value: function submit(event) {
+      var _this2 = this;
+
       event.preventDefault(); // C.4. la validation du formulaire
       // const nomInput:?HTMLElement = document.querySelector('input[name=nom]');
       // if (nomInput && nomInput instanceof HTMLInputElement){
       // 	if ( nomInput.value == '' ) {
       // 		alert('Le champ nom ne peut pas être vide');
       // 	} else {
-      // 		alert(`La Pizza ${nomInput.value} ajoutée !`);
+      // 		alert(`Pizza "${nomInput.value}" enregistrée avec succès !`);
       // 		nomInput.value = '';
       // 	}
       // }
       //C.5 le formulaire complet
 
-      var fieldNames = ['nom', 'base', 'prix_petite', 'prix_grande', 'ingredients']; // on vérifie tous les champs à l'aide de la méthode validateField
+      var fieldNames = ['nom', 'base', 'prix_petite', 'prix_grande', 'ingredients']; // on vérifie la valeur saisie dans chaque champ
 
-      var errors = fieldNames.reduce(this.validateField, []);
+      var values = {};
+      var errors = [];
+      fieldNames.forEach(function (fieldName) {
+        var value = _this2.getFieldValue(fieldName);
+
+        if (!value) {
+          errors.push("Le champ ".concat(fieldName, " ne peut \xEAtre vide !"));
+        }
+
+        values[fieldName] = value;
+      });
 
       if (errors.length) {
         // si des erreurs sont détectées, on les affiche
         alert(errors.join('\n'));
       } else {
-        // si il n'y a pas d'erreur, on vide le formulaire
+        // si il n'y a pas d'erreur, on affiche un message de succès
+        alert("Pizza \"".concat(values.nom, "\" enregistr\xE9e avec succ\xE8s !")); // puis on vide le formulaire
+
         var form = document.querySelector('form.addPizzaPage');
 
         if (form && form instanceof HTMLFormElement) {
@@ -181,15 +195,28 @@ function (_Page) {
       }
     }
   }, {
-    key: "validateField",
-    value: function validateField(errors, fieldName) {
+    key: "getFieldValue",
+    value: function getFieldValue(fieldName) {
+      // on récupère une référence vers le champ qui a comme attribut `name` la valeur fieldName (nom, base, prix_petite, etc.)
       var field = document.querySelector("[name=".concat(fieldName, "]"));
 
-      if (field instanceof HTMLInputElement && field.value == '' || field instanceof HTMLSelectElement && field.selectedOptions.length == 0) {
-        return errors.concat("Le champ ".concat(fieldName, " ne peut \xEAtre vide !"));
+      if (field instanceof HTMLInputElement) {
+        // s'il s'agit d'un <input> on utilise la propriété `value`
+        // et on retourne la chaine de caractère saisie
+        return field.value != '' ? field.value : null;
+      } else if (field instanceof HTMLSelectElement) {
+        // s'il s'agit d'un <select> on utilise la propriété `selectedOptions`
+        var values = [];
+
+        for (var i = 0; i < field.selectedOptions.length; i++) {
+          values.push(field.selectedOptions[i].value);
+        } // et on retourne un tableau avec les valeurs sélectionnées
+
+
+        return values.length ? values : null;
       }
 
-      return errors;
+      return null;
     }
   }]);
 
@@ -663,17 +690,17 @@ _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(homePage); /
 // console.log( document.querySelectorAll('.navbar-right li a') );
 // console.log( document.querySelectorAll('.pizzasContainer article .infos li') );
 //A.3.1. innerHTML
+// console.log( document.querySelectorAll('.pizzasContainer article h4' )[1].innerHTML )
+// document.querySelectorAll('.pizzasContainer article h4' )[1].innerHTML = 'Savoyarde';
 
-console.log(document.querySelectorAll('.pizzasContainer article h4')[1].innerHTML);
-document.querySelectorAll('.pizzasContainer article h4')[1].innerHTML = 'Savoyarde';
 var logoContainer = document.querySelector('.navbar-brand');
 
 if (logoContainer) {
   logoContainer.innerHTML += '<small class="label label-success">les pizzas c\'est la vie</small>';
 } // A.3.2. getAttribute/setAttribute
+// console.log( document.querySelectorAll('footer a')[1].getAttribute('href'));
 
 
-console.log(document.querySelectorAll('footer a')[1].getAttribute('href'));
 var homeLink = document.querySelector('.navbar-right li');
 
 if (homeLink) {
@@ -683,19 +710,19 @@ if (homeLink) {
 
 function handleNavClick(event) {
   event.preventDefault();
-  var activeLink = event.currentTarget;
+  var link = event.currentTarget;
 
-  if (activeLink instanceof HTMLElement) {
-    console.log(activeLink.innerHTML);
-    var activeLi = activeLink.parentElement,
+  if (link instanceof HTMLElement) {
+    console.log(link.innerHTML);
+    var li = link.parentElement,
         prevActiveLi = document.querySelector('.navbar-right li.active');
 
     if (prevActiveLi) {
       prevActiveLi.setAttribute('class', '');
     }
 
-    if (activeLi) {
-      activeLi.setAttribute('class', 'active');
+    if (li) {
+      li.setAttribute('class', 'active');
     }
   }
 }
@@ -705,13 +732,18 @@ navLinks.forEach(function (element) {
   return element.addEventListener('click', handleNavClick);
 }); //C.3. le formulaire d'ajout de pizza
 
-var addPizzaPage = new _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_3__["default"](),
-    addPizzaLink = document.querySelector('.pizzaFormButton');
+var addPizzaPage = new _AddPizzaPage_js__WEBPACK_IMPORTED_MODULE_3__["default"]();
+
+function renderAddPizza() {
+  _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(addPizzaPage);
+}
+
+var addPizzaLink = document.querySelector('.pizzaFormButton');
 
 if (addPizzaLink) {
   addPizzaLink.addEventListener('click', function (event) {
     event.preventDefault();
-    _PageRenderer_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderPage(addPizzaPage);
+    renderAddPizza();
   });
 }
 

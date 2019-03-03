@@ -23,15 +23,15 @@ PageRenderer.renderPage( homePage ); // liste des vidéos
 // console.log( document.querySelectorAll('.pizzasContainer article .infos li') );
 
 //A.3.1. innerHTML
-console.log( document.querySelectorAll('.pizzasContainer article h4' )[1].innerHTML )
-document.querySelectorAll('.pizzasContainer article h4' )[1].innerHTML = 'Savoyarde';
+// console.log( document.querySelectorAll('.pizzasContainer article h4' )[1].innerHTML )
+// document.querySelectorAll('.pizzasContainer article h4' )[1].innerHTML = 'Savoyarde';
 const logoContainer:?HTMLElement = document.querySelector('.navbar-brand');
 if (logoContainer){
 	logoContainer.innerHTML += '<small class="label label-success">les pizzas c\'est la vie</small>';
 }
 
 // A.3.2. getAttribute/setAttribute
-console.log( document.querySelectorAll('footer a')[1].getAttribute('href'));
+// console.log( document.querySelectorAll('footer a')[1].getAttribute('href'));
 const homeLink:?HTMLElement = document.querySelector('.navbar-right li');
 if (homeLink) {
 	homeLink.setAttribute('class', 'active');
@@ -41,16 +41,16 @@ if (homeLink) {
 function handleNavClick(event:Event){
 	event.preventDefault();
 
-	const activeLink:EventTarget = event.currentTarget;
-	if (activeLink instanceof HTMLElement){
-		console.log(activeLink.innerHTML);
-		const activeLi:?Element = activeLink.parentElement,
+	const link:EventTarget = event.currentTarget;
+	if (link instanceof HTMLElement){
+		console.log(link.innerHTML);
+		const li:?Element = link.parentElement,
 			prevActiveLi:?Element = document.querySelector('.navbar-right li.active');
 		if (prevActiveLi) {
 			prevActiveLi.setAttribute('class', '');
 		}
-		if (activeLi) {
-			activeLi.setAttribute('class', 'active');
+		if (li) {
+			li.setAttribute('class', 'active');
 		}
 	}
 }
@@ -58,12 +58,15 @@ const navLinks:NodeList<HTMLElement> = document.querySelectorAll('.navbar-right 
 navLinks.forEach( element => element.addEventListener('click', handleNavClick) );
 
 //C.3. le formulaire d'ajout de pizza
-const addPizzaPage = new AddPizzaPage(),
-	addPizzaLink:?HTMLElement = document.querySelector('.pizzaFormButton');
+const addPizzaPage:AddPizzaPage = new AddPizzaPage();
+function renderAddPizza():void{
+	PageRenderer.renderPage( addPizzaPage );
+}
 
+const addPizzaLink:?HTMLElement = document.querySelector('.pizzaFormButton');
 if (addPizzaLink) {
 	addPizzaLink.addEventListener('click', (event:Event)=>{
 		event.preventDefault();
-		PageRenderer.renderPage( addPizzaPage );
+		renderAddPizza();
 	})
 }
