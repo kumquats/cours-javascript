@@ -55,8 +55,10 @@ Comme on peut le voir, **aucune version d'Internet Explorer n'est compatible ave
 	  <h1>Welcome to PizzaLand !</h1>
 	  <p>
 	    Cette semaine découvrez notre nouvelle pizza
-	    <strong class="spicy">Spicy</strong>
-	    <img src="images/hot.svg" class="spicy-icon" />
+	    <strong class="spicy">
+			Spicy
+			<img src="images/hot.svg" class="spicy-icon" />
+		</strong>
 	    aux délicieuses saveurs épicées !
 	  </p>
 	</article>
